@@ -3,6 +3,8 @@ import './App.css';
 import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
 import Example from "./pages/Example";
+import RegisterForm from "./pages/RegisterForm";
+import LoginForm from "./pages/LoginForm";
 
 
 const router = createBrowserRouter([
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
       {
         path: "/example",
         element: <Example/>
+      },
+      {
+        path: "/register",
+        element: <RegisterForm/>
+      },
+      {
+        path: "/login",
+        element: <LoginForm/>
       },
     ]
   }
