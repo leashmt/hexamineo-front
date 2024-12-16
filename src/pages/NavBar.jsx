@@ -11,6 +11,12 @@ const NavBar = () => {
           <Link to="/example" className="hover:underline">
             Example
           </Link>
+          <Link to="/register" className="hover:underline">
+            Inscription
+          </Link>
+          <Link to="/login" className="hover:underline">
+            Connexion
+          </Link>
         </nav>
       </header>
       <Outlet />
