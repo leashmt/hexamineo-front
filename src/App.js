@@ -3,6 +3,7 @@ import './App.css';
 import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
 import Example from "./pages/Example";
+import Authentification from "./pages/Authentification";
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/example",
         element: <Example/>
+      },
+      {
+        path: "/auth",
+        element: <Authentification/>
       },
     ]
   }
