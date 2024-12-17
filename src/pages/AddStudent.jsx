@@ -5,10 +5,10 @@ const AddStudent = () => {
 	const [csvFile, setCsvFile] = useState(null);
 
 	const [student, setStudent] = useState({
-		nom: '',
-		prenom: '',
-		dateNaissance: '',
-		niveau: '',
+		nom: 'Léa',
+		prenom: 'Schmitt',
+		dateDeNaissance: '',
+		// niveau: '',
 	});
 
 	const handleChange = e => {
@@ -19,10 +19,35 @@ const AddStudent = () => {
 		}));
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
-		// Ajouter l'envoie en base de donnée
-		console.log(student);
+
+		try {
+			const response = await fetch('http://localhost:3001/api/eleves', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(student),
+			});
+
+			console.log('Réponse du serveur :', response);
+
+			if (response.ok) {
+				// todo Message de validation
+				setStudent({
+					nom: '',
+					prenom: '',
+					dateDeNaissance: '',
+					// niveau: '',
+				});
+			} else {
+				alert('Une erreur est survenue');
+			}
+		} catch (error) {
+			console.error('Erreur réseau ou serveur :', error);
+			alert('Impossible de se connecter au serveur');
+		}
 	};
 
 	const onDrop = useCallback(acceptedFiles => {
@@ -69,17 +94,17 @@ const AddStudent = () => {
 				</div>
 
 				<div>
-					<label htmlFor="dateNaissance">Date de naissance :</label>
+					<label htmlFor="dateDeNaissance">Date de naissance :</label>
 					<input
 						type="date"
-						id="dateNaissance"
-						name="dateNaissance"
-						value={student.dateNaissance}
+						id="dateDeNaissance"
+						name="dateDeNaissance"
+						value={student.dateDeNaissance}
 						onChange={handleChange}
 						required
 					/>
 				</div>
-
+				{/* 
 				<div>
 					<label htmlFor="niveau">Niveau :</label>
 					<select
@@ -89,7 +114,7 @@ const AddStudent = () => {
 						onChange={handleChange}
 						required
 					>
-						<option value="">Sélectionnez un niveau</option>
+						<option value="">Non renseigné</option>
 						<option value="FirstSection">1ère section maternelle</option>
 						<option value="SecondSection">2ème section maternelle</option>
 						<option value="ThirdSection">3ème section maternelle</option>
@@ -99,7 +124,7 @@ const AddStudent = () => {
 						<option value="CM1">CM1</option>
 						<option value="CM2">CM2</option>
 					</select>
-				</div>
+				</div> */}
 
 				<button type="submit">Inscrire l'élève</button>
 			</form>
