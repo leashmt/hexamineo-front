@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-function StudentForm() {
+function AddStudent() {
     const [csvFile, setCsvFile] = useState(null);
 
 
@@ -128,4 +128,4 @@ function StudentForm() {
   );
 }
 
-export default StudentForm;
+export default AddStudent;

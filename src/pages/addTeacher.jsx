@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ProfessorForm() {
+function addTeacher() {
   const [student, setStudent] = useState({
     nom: '',
     prenom: '',
@@ -65,4 +65,4 @@ function ProfessorForm() {
   );
 }
 
-export default ProfessorForm;
+export default addTeacher;

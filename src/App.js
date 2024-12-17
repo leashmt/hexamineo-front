@@ -3,7 +3,7 @@ import './App.css';
 import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
 import Example from "./pages/Example";
-import StudentForm from "./pages/StudentForm";
+import AddStudent from "./pages/AddStudent";
 
 
 const router = createBrowserRouter([
@@ -13,11 +13,11 @@ const router = createBrowserRouter([
     children : [
       {
         index: true,
-        element: <Home />
+        element: <AddStudent />
       },
       {
         path: "/example",
-        element: <StudentForm/>
+        element: <Example/>
       },
     ]
   }
