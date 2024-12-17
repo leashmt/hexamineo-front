@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// Exemple de données des élèves
 const studentsData = [
   {
     _id: "1",
@@ -33,14 +32,12 @@ const PageVisualisationClasses = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
 
   useEffect(() => {
-    // Filtrer les élèves par classe sélectionnée
     const students = studentsData.filter(
       (student) => student.niveau === selectedClass
     );
     setFilteredStudents(students);
   }, [selectedClass]);
 
-  // Fonction pour changer l'état des élèves
   const updateStudentStatus = (id, statusType) => {
     const updatedStudents = filteredStudents.map((student) => {
       if (student._id === id) {
@@ -61,7 +58,6 @@ const PageVisualisationClasses = () => {
         Visualisation des Classes
       </h1>
 
-      {/* Sélecteur des classes */}
       <div className="mb-4">
         <label className="block text-gray-700 font-semibold mb-2">
           Sélectionnez une classe :
@@ -134,7 +130,6 @@ const PageVisualisationClasses = () => {
               ))}
             </ul>
 
-            {/* Bouton Valider */}
             <div className="flex justify-center mt-6">
               <button
                 onClick={() => console.log("Validation des élèves")}
