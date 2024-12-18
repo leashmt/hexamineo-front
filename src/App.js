@@ -2,9 +2,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import NavBar from './pages/NavBar';
+import Example from './pages/Example';
+import Classes from './pages/Classes';
+import ProfessorDistribution from './pages/ProfessorDistribution';
 import AddStudent from './pages/AddStudent';
 import AddTeacher from './pages/AddTeacher';
-import Classes from './pages/Classes';
 import Archives from './pages/Archives';
 
 const router = createBrowserRouter([
@@ -17,16 +19,20 @@ const router = createBrowserRouter([
 				element: <Home />,
 			},
 			{
+				path: '/classes',
+				element: <Classes />,
+			},
+			{
+				path: '/professorDistribution',
+				element: <ProfessorDistribution />,
+			},
+			{
 				path: '/addStudent',
 				element: <AddStudent />,
 			},
 			{
 				path: '/addTeacher',
 				element: <AddTeacher />,
-			},
-			{
-				path: '/classes',
-				element: <Classes />,
 			},
 			{
 				path: '/archives',
