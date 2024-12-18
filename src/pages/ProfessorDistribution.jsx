@@ -64,11 +64,36 @@ const ProfessorDistribution = () => {
 		setAttribution(nextAttribution);
 	};
 
+	const updateLevels = async () => {
+		try {
+			const response = await fetch(
+				'http://localhost:3001/api/professeurs/update-levels',
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(attribution),
+				}
+			);
+
+			const data = await response.json();
+			if (response.ok) {
+				console.log('Niveaux mis à jour :', data);
+			} else {
+				console.error('Erreur lors de la mise à jour :', data.message);
+			}
+		} catch (error) {
+			console.error('Erreur lors de la requête :', error);
+		}
+	};
+
 	const handleValidation = () => {
 		const emptyClasses = checkEmptyClasses(attribution);
 		if (emptyClasses.length === 0) {
 			setMessage('');
-			alert('Répartition validée avec succès !');
+			console.log(attribution);
+			updateLevels();
 		} else {
 			const message = `Les classes suivantes n'ont pas de professeur : ${emptyClasses.join(
 				', '
