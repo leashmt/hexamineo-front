@@ -1,25 +1,48 @@
 import React, { useState } from 'react';
 
 function AddTeacher() {
-	const [student, setStudent] = useState({
+	const [message, setMessage] = useState('');
+	const [teacher, setTeacher] = useState({
 		nom: '',
 		prenom: '',
 		email: '',
-		classe: '',
 	});
 
 	const handleChange = e => {
+		setMessage('');
 		const { name, value } = e.target;
-		setStudent(prevState => ({
+		setTeacher(prevState => ({
 			...prevState,
 			[name]: value,
 		}));
 	};
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
-		// Ajouter l'envoie en base de donnée
-		console.log(student);
+
+		try {
+			const response = await fetch('http://localhost:3001/api/professeurs', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(teacher),
+			});
+
+			if (response.ok) {
+				setMessage("L'enseignant a bien été ajouté");
+				setTeacher({
+					nom: '',
+					prenom: '',
+					email: '',
+				});
+			} else {
+				alert('Une erreur est survenue');
+			}
+		} catch (error) {
+			console.error('Erreur réseau ou serveur :', error);
+			alert('Impossible de se connecter au serveur');
+		}
 	};
 
 	return (
@@ -32,6 +55,12 @@ function AddTeacher() {
 					Information professeur
 				</h2>
 
+				{message && (
+					<p className="text-green-500 border border-green-500 rounded-md p-1 mb-2 w-full text-center">
+						{message}
+					</p>
+				)}
+
 				<div className="mb-4">
 					<label
 						htmlFor="nom"
@@ -43,7 +72,7 @@ function AddTeacher() {
 						type="text"
 						id="nom"
 						name="nom"
-						value={student.nom}
+						value={teacher.nom}
 						onChange={handleChange}
 						required
 						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -61,25 +90,7 @@ function AddTeacher() {
 						type="text"
 						id="prenom"
 						name="prenom"
-						value={student.prenom}
-						onChange={handleChange}
-						required
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-					/>
-				</div>
-
-				<div className="mb-4">
-					<label
-						htmlFor="nom"
-						className="block text-purple-custom text-sm font-bold mb-2 text-start"
-					>
-						Classe :
-					</label>
-					<input
-						type="text"
-						id="classe"
-						name="classe"
-						value={student.classe}
+						value={teacher.prenom}
 						onChange={handleChange}
 						required
 						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -94,10 +105,10 @@ function AddTeacher() {
 						Email :
 					</label>
 					<input
-						type="text"
+						type="email"
 						id="email"
 						name="email"
-						value={student.dateNaissance}
+						value={teacher.email}
 						onChange={handleChange}
 						required
 						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
