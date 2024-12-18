@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
 import Example from "./pages/Example";
 import Classes from "./pages/Classes";
-
+import Archives from "./pages/Archives";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/classes",
         element: <Classes/>
+      },
+      {
+        path: "/archives",
+        element: <Archives/>
       },
     ]
   }
