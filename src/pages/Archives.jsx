@@ -1,14 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-// const archivedStudents = [
-// 	{ id: 1, name: 'Élise Guillou', niveau: 'CM2', year: 2023 },
-// 	{ id: 2, name: 'René Dupuy', niveau: 'CE1', year: 2022 },
-// 	{ id: 3, name: 'Thibaut Bodin', niveau: 'CM2', year: 2022 },
-// 	{ id: 4, name: 'Claire Chevallier', niveau: 'CM2', year: 2023 },
-// 	{ id: 5, name: 'André Brunet', niveau: 'CE1', year: 2023 },
-// 	{ id: 6, name: 'Timothée Jacob', niveau: 'CM2', year: 2021 },
-// ];
-
 const Archives = () => {
 	const [selectedYear, setSelectedYear] = useState('');
 	const [selectedLevel, setSelectedLevel] = useState('');
@@ -19,7 +10,6 @@ const Archives = () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/archive');
 				const data = await response.json();
-				console.log(data);
 				setArchivedStudents(data);
 			} catch (error) {
 				console.error('Erreur lors de la récupération des élèves:', error);
