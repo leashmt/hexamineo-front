@@ -9,6 +9,7 @@ const NavBar = () => {
           <div className = "flex space-x-8">   
             <Link to="/" className="hover:text-yellow-highlight">Accueil</Link>
             <Link to="/classes" className="hover:text-yellow-highlight">Visualiser les classes</Link>
+            <Link to="/archives" className="hover:text-yellow-highlight">Archives</Link>
             <Link to="/auth" className="hover:text-yellow-highlight">Login/Register</Link>
           </div>
         </nav>
