@@ -36,7 +36,7 @@ const PageVisualisationClasses = () => {
 			if (student._id === id) {
 				return {
 					...student,
-					repeatingGrade: statusType === 'repeat',
+					repeatGrade: statusType === 'repeat',
 					skipGrade: statusType === 'skip',
 				};
 			}
@@ -83,7 +83,7 @@ const PageVisualisationClasses = () => {
 								<li
 									key={student._id}
 									className={`flex items-center justify-between p-4 mb-2 rounded-lg border ${
-										student.repeatingGrade
+										student.repeatGrade
 											? 'bg-red-100 border-red-400'
 											: student.skipGrade
 											? 'bg-green-100 border-green-400'
@@ -97,7 +97,7 @@ const PageVisualisationClasses = () => {
 									</div>
 									<div className="flex items-left w-1/4">
 										<p className="text-gray-500 ml-2 italic">
-											{student.repeatingGrade
+											{student.repeatGrade
 												? 'Redoublement'
 												: student.skipGrade
 												? 'Saut de classe'
@@ -116,7 +116,7 @@ const PageVisualisationClasses = () => {
 												student={student}
 											/>
 										)}
-										{student.repeatingGrade ? (
+										{student.repeatGrade ? (
 											<ButtonReset
 												updateStudentStatus={updateStudentStatus}
 												student={student}
