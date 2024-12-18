@@ -34,10 +34,8 @@ const Archives = () => {
 			<h1 className="text-3xl font-bold mb-6 text-gray-800">Archives des élèves</h1>
 
 			<div className="flex flex-wrap mb-6 space-x-4">
-				<div className="flex">
-					<label className="block mb-2 text-gray-700 font-semibold">
-						Année
-					</label>
+				<div className="flex gap-2 items-center">
+					<label className="block text-gray-700 font-semibold">Année :</label>
 					<select
 						value={selectedYear}
 						onChange={e => setSelectedYear(e.target.value)}
@@ -52,10 +50,8 @@ const Archives = () => {
 					</select>
 				</div>
 
-				<div className="flex">
-					<label className="block mb-2 text-gray-700 font-semibold">
-						Niveau
-					</label>
+				<div className="flex gap-2 items-center">
+					<label className="block text-gray-700 font-semibold">Niveau :</label>
 					<select
 						value={selectedLevel}
 						onChange={e => setSelectedLevel(e.target.value)}

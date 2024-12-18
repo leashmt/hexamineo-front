@@ -92,7 +92,6 @@ const ProfessorDistribution = () => {
 		const emptyClasses = checkEmptyClasses(attribution);
 		if (emptyClasses.length === 0) {
 			setMessage('');
-			console.log(attribution);
 			updateLevels();
 		} else {
 			const message = `Les classes suivantes n'ont pas de professeur : ${emptyClasses.join(
