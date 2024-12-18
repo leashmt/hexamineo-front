@@ -12,7 +12,6 @@ const ButtonRepeat = ({ updateStudentStatus, student }) => {
 					},
 				}
 			);
-			console.log(response);
 			if (response.ok) {
 				updateStudentStatus(student._id, 'repeat');
 			} else {

@@ -70,7 +70,6 @@ const PageVisualisationClasses = () => {
 				</select>
 			</div>
 
-			{/* Liste des élèves */}
 			<div className="bg-white p-6 rounded-lg shadow-md">
 				{filteredStudents.length === 0 ? (
 					<p className="text-gray-500 text-center">
