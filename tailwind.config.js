@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			colors: {
 				'purple-custom': '#5F6C96',
+				'purple-custom-hover': '#4c577a',
 				'white-background': '#F4F6FA',
 				'yellow-highlight': '#FFD166',
 			},
