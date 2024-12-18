@@ -1,125 +1,184 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { LIST_LEVELS } from '../constants';
 
-const niveaux = [
-  "1ère section maternelle",
-  "2ème section maternelle",
-  "3ème section maternelle",
-  "CP",
-  "CE1",
-  "CE2",
-  "CM1",
-  "CM2",
-];
+const ProfessorDistribution = () => {
+	const [professeurs, setProfesseurs] = useState([]);
+	const [canSubmit, setCanSubmit] = useState(true);
+	const [attribution, setAttribution] = useState(undefined);
+	const [message, setMessage] = useState('');
 
-const initialProfesseurs = [
-  { id: 1, name: "Jean Dupont", niveau: "" },
-  { id: 2, name: "Marie Curie", niveau: "" },
-  { id: 3, name: "Luc Martin", niveau: "" },
-  { id: 4, name: "Anne Leroy", niveau: "" },
-  { id: 5, name: "Paul Simon", niveau: "" },
-  { id: 6, name: "Laura Bernard", niveau: "" },
-  { id: 7, name: "Alexandre Petit", niveau: "" },
-  { id: 8, name: "Camille Richard", niveau: "" },
-  { id: 9, name: "Sophie Garnier", niveau: "" },
-];
+	useEffect(() => {
+		let initialAttribution = {
+			'1ère section maternelle': '',
+			'2ème section maternelle': '',
+			'3ème section maternelle': '',
+			CP: '',
+			CE1: '',
+			CE2: '',
+			CM1: '',
+			CM2: '',
+		};
 
-const ProfessorDistribution= () => {
-  const [professeurs, setProfesseurs] = useState(initialProfesseurs);
-  const [uniqueProfByNiveau, setUniqueProfByNiveau] = useState(true);
+		const fetchProfesseurs = async () => {
+			try {
+				const response = await fetch('http://localhost:3001/api/professeurs');
+				const data = await response.json();
+				for (let prof of data) {
+					if (prof.niveau === 'Non renseigné') {
+						continue;
+					}
+					initialAttribution[prof.niveau] = prof.nom;
+				}
+				setAttribution(initialAttribution);
+				setProfesseurs(data);
+			} catch (error) {
+				console.error('Erreur lors de la récupération des professeurs:', error);
+			}
+		};
 
-  // Fonction pour gérer la sélection d'un niveau
-  const handleNiveauChange = (id, selectedNiveau) => {
-    const updatedProfesseurs = professeurs.map((prof) =>
-      prof.id === id ? { ...prof, niveau: selectedNiveau } : prof
-    );
-    setProfesseurs(updatedProfesseurs);
+		fetchProfesseurs();
+	}, []);
 
-    // Vérification des règles après chaque modification
-    checkValidationRules(updatedProfesseurs);
-  };
+	const handleNiveauChange = (nom, selectedNiveau) => {
+		const previsousNiveau = getKeyByValue(attribution, nom);
 
-  // Fonction pour vérifier les règles
-  const checkValidationRules = (updatedProfesseurs) => {
-    const niveauxAttribués = updatedProfesseurs
-      .map((prof) => prof.niveau)
-      .filter((niveau) => niveau !== "");
+		const nextAttribution = {
+			...attribution,
+			[selectedNiveau]: nom,
+			[previsousNiveau]: '',
+		};
 
-    const niveauxUniques = new Set(niveauxAttribués);
-    setUniqueProfByNiveau(niveauxAttribués.length === niveauxUniques.size);
-  };
+		const emptyClasses = checkEmptyClasses(nextAttribution);
 
-  // Fonction pour valider la répartition
-  const handleValidation = () => {
-    if (uniqueProfByNiveau) {
-      alert("Répartition validée avec succès !");
-    } else {
-      alert("Erreur : Un seul prof par niveau est autorisé !");
-    }
-  };
+		if (emptyClasses.length > 0) {
+			const message = `Les classes suivantes n'ont pas de professeur : ${emptyClasses.join(
+				', '
+			)}`;
+			setMessage(message);
+			setCanSubmit(false);
+		} else {
+			setMessage('');
+			setCanSubmit(true);
+		}
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">
-        Répartition des professeurs
-      </h1>
+		setAttribution(nextAttribution);
+	};
 
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <table className="w-full table-auto">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="p-3 text-left">PROF</th>
-              <th className="p-3 text-left">CLASSE</th>
-            </tr>
-          </thead>
-          <tbody>
-            {professeurs.map((prof) => (
-              <tr key={prof.id} className="border-b">
-                <td className="p-3">{prof.name}</td>
-                <td className="p-3">
-                  <select
-                    value={prof.niveau}
-                    onChange={(e) =>
-                      handleNiveauChange(prof.id, e.target.value)
-                    }
-                    className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
-                  >
-                    <option value="">Choisir un niveau</option>
-                    {niveaux.map((niveau) => (
-                      <option key={niveau} value={niveau}>
-                        {niveau}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+	const handleValidation = () => {
+		const emptyClasses = checkEmptyClasses(attribution);
+		if (emptyClasses.length === 0) {
+			setMessage('');
+			alert('Répartition validée avec succès !');
+		} else {
+			const message = `Les classes suivantes n'ont pas de professeur : ${emptyClasses.join(
+				', '
+			)}`;
+			setMessage(message);
+		}
+	};
 
-      {/* Bouton Valider */}
-      <div className="flex justify-end mt-6">
-        <button
-          onClick={handleValidation}
-          disabled={!uniqueProfByNiveau}
-          className={`px-6 py-2 text-white font-semibold rounded-lg transition ${
-            uniqueProfByNiveau
-              ? "bg-green-500 hover:bg-green-600"
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
-        >
-          VALIDER
-        </button>
-      </div>
+	const getKeyByValue = (obj, value) => {
+		for (let key in obj) {
+			if (obj[key] === value) {
+				return key;
+			}
+		}
+		return null;
+	};
 
-      {/* Message d'erreur */}
-      {!uniqueProfByNiveau && (
-        <p className="mt-4 text-red-500 text-sm">
-          Erreur : Chaque niveau doit avoir un seul professeur.
-        </p>
-      )}
-    </div>
-  );
+	const checkEmptyClasses = obj => {
+		let emptyClasses = [];
+		for (let key in obj) {
+			if (key === 'Non renseigné') {
+				continue;
+			}
+			if (!obj[key]) {
+				emptyClasses.push(key);
+			}
+		}
+		return emptyClasses;
+	};
+
+	return (
+		<div className="min-h-screen bg-gray-100 p-8">
+			<h1 className="text-3xl font-bold mb-6 text-gray-800">
+				Répartition des professeurs
+			</h1>
+
+			<div className="bg-white p-6 rounded-lg shadow-md">
+				<table className="w-full table-auto">
+					<thead>
+						<tr className="bg-gray-200 rounded-t-md" key="title">
+							<th className="p-3 text-left">ENSEIGNANT</th>
+							<th className="p-3 text-left">CLASSE</th>
+						</tr>
+					</thead>
+					<tbody>
+						{professeurs.length === 0 ? (
+							<tr>
+								<td
+									key="empty"
+									colSpan="2"
+									className="p-3 text-center text-gray-500"
+								>
+									Aucun professeur disponible
+								</td>
+							</tr>
+						) : (
+							professeurs.map(prof => (
+								<tr key={prof.id} className="border-b">
+									<td className="p-3 text-start">{prof.nom}</td>
+									<td className="p-3">
+										<select
+											value={
+												getKeyByValue(attribution, prof.nom) ||
+												'Non renseigné'
+											}
+											onChange={e =>
+												handleNiveauChange(
+													prof.nom,
+													e.target.value
+												)
+											}
+											className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
+										>
+											<option
+												value="Non renseigné"
+												key={'Non renseigné'}
+											>
+												Choisir un niveau
+											</option>
+											{LIST_LEVELS.map(niveau => (
+												<option key={niveau} value={niveau}>
+													{niveau}
+												</option>
+											))}
+										</select>
+									</td>
+								</tr>
+							))
+						)}
+					</tbody>
+				</table>
+			</div>
+
+			{message && <p className="mt-4 text-red-500 text-sm">{message}</p>}
+
+			<div className="flex justify-end mt-6">
+				<button
+					onClick={handleValidation}
+					disabled={!canSubmit}
+					className={`px-6 py-2 text-white font-semibold rounded-lg transition ${
+						canSubmit
+							? 'bg-green-500 hover:bg-green-600'
+							: 'bg-gray-400 cursor-not-allowed'
+					}`}
+				>
+					VALIDER
+				</button>
+			</div>
+		</div>
+	);
 };
 
 export default ProfessorDistribution;
