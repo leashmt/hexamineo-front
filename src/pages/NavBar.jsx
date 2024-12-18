@@ -8,6 +8,8 @@ const NavBar = () => {
         <nav className="flex justify-center space-x-6 text-lg">
           <div className = "flex space-x-8">   
             <Link to="/" className="hover:text-yellow-highlight">Accueil</Link>
+            <Link to="/addStudent" className="hover:text-yellow-highlight">Ajouter des élèves</Link>
+            <Link to="/addTeacher" className="hover:text-yellow-highlight">Ajouter des professeurs</Link>
             <Link to="/classes" className="hover:text-yellow-highlight">Visualiser les classes</Link>
             <Link to="/auth" className="hover:text-yellow-highlight">Login/Register</Link>
           </div>
