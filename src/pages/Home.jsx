@@ -16,7 +16,8 @@ const Home = () => {
             <Button label="Ajouter un professeur" onClick={() => navigate("/addTeacher")} />
             <Button label="Ajouter une classe" onClick={() => navigate("/addClasses")} />
             <Button label="Visualiser les classes" onClick={() => navigate("/classes")} />
-            <Button label="Clôturer l'année" color="bg-yellow-highlight" onClick={() => navigate("/closeYear")} />            </div>
+            <Button label="Archives" onClick={() => navigate("/archives")} />
+            <Button label="Clôturer l'année" color="bg-yellow-highlight" onClick={() => navigate("/closeYear")} /></div>
           </div>
         </div>
     )
