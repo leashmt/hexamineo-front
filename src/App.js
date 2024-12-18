@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
 import Example from "./pages/Example";
 import Classes from "./pages/Classes";
+import ProfessorDistribution from "./pages/ProfessorDistribution";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "/classes",
         element: <Classes/>
+      },
+      {
+        path: "/professorDistribution",
+        element: <ProfessorDistribution/>
       },
     ]
   }
