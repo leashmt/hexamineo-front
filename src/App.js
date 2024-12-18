@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import NavBar from "./pages/NavBar";
 import AddStudent from "./pages/AddStudent";
 import AddTeacher from "./pages/AddTeacher";
+import CloseYear from "./pages/CloseYear";
+import CloseYearConfirmation from "./pages/CloseYearConfirmation";
+
 
 
 const router = createBrowserRouter([
@@ -22,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/addTeacher",
         element: <AddTeacher/>
+      },
+      {
+        path: "/closeYear",
+        element: <CloseYear/>
+      },
+      {
+        path: "/closeYearConfirmation" ,
+        element: <CloseYearConfirmation/>
       },
     ]
   }
