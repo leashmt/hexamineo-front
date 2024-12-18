@@ -5,10 +5,9 @@ const AddStudent = () => {
 	const [csvFile, setCsvFile] = useState(null);
 	const [message, setMessage] = useState('');
 	const [student, setStudent] = useState({
-		nom: 'Léa',
-		prenom: 'Schmitt',
+		nom: '',
+		prenom: '',
 		dateDeNaissance: '',
-		// niveau: '',
 	});
 
 	const handleChange = e => {
@@ -92,14 +91,22 @@ const AddStudent = () => {
 	});
 
 	return (
-		<div className="flex-grow flex py-12">
-			<form onSubmit={handleSubmit}>
-				<h2 className="text-2xl font-semibold text-gray-700 mb-6">
+		<div className="flex flex-col items-center justify-center pt-[50px]">
+			<form
+				onSubmit={handleSubmit}
+				className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md"
+			>
+				<h2 className="text-2xl font-bold mb-6 text-purple-custom text-center">
 					Ajouter un élève
 				</h2>
 
-				<div>
-					<label htmlFor="nom">Nom :</label>
+				<div className="mb-4">
+					<label
+						htmlFor="nom"
+						className="block text-purple-custom text-sm font-bold mb-2 text-start"
+					>
+						Nom :
+					</label>
 					<input
 						type="text"
 						id="nom"
@@ -107,11 +114,17 @@ const AddStudent = () => {
 						value={student.nom}
 						onChange={handleChange}
 						required
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
 					/>
 				</div>
 
-				<div>
-					<label htmlFor="prenom">Prénom :</label>
+				<div className="mb-4">
+					<label
+						htmlFor="prenom"
+						className="block text-purple-custom text-sm font-bold mb-2 text-start"
+					>
+						Prénom :
+					</label>
 					<input
 						type="text"
 						id="prenom"
@@ -119,11 +132,17 @@ const AddStudent = () => {
 						value={student.prenom}
 						onChange={handleChange}
 						required
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
 					/>
 				</div>
 
-				<div>
-					<label htmlFor="dateDeNaissance">Date de naissance :</label>
+				<div className="mb-4">
+					<label
+						htmlFor="dateNaissance"
+						className="block text-purple-custom text-sm font-bold mb-2 text-start"
+					>
+						Date de naissance :
+					</label>
 					<input
 						type="date"
 						id="dateDeNaissance"
@@ -131,17 +150,24 @@ const AddStudent = () => {
 						value={student.dateDeNaissance}
 						onChange={handleChange}
 						required
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
 					/>
 				</div>
-				{/* 
-				<div>
-					<label htmlFor="niveau">Niveau :</label>
+
+				<div className="mb-6">
+					<label
+						htmlFor="dateNaissance text-start"
+						className="block text-purple-custom text-sm font-bold mb-2 text-start"
+					>
+						Niveau :
+					</label>
 					<select
 						id="niveau"
 						name="niveau"
 						value={student.niveau}
 						onChange={handleChange}
 						required
+						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
 					>
 						<option value="">Non renseigné</option>
 						<option value="FirstSection">1ère section maternelle</option>
@@ -153,29 +179,35 @@ const AddStudent = () => {
 						<option value="CM1">CM1</option>
 						<option value="CM2">CM2</option>
 					</select>
-				</div> */}
+				</div>
 
-				<button type="submit">Inscrire l'élève</button>
+				<button
+					type="submit"
+					className="bg-purple-custom hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none w-full"
+				>
+					Inscrire l'élève
+				</button>
 			</form>
 			<form onSubmit={handleCSVSubmit}>
 				<div
 					{...getRootProps()}
-					style={{
-						border: '2px dashed #cccccc',
-						borderRadius: '4px',
-						padding: '20px',
-						textAlign: 'center',
-						cursor: 'pointer',
-						marginTop: '20px',
-						backgroundColor: csvFile ? '#e6ffe6' : 'white',
-					}}
+					className={`mt-4 border-2 border-dashed rounded-lg p-6 text-center cursor-pointer w-full max-w-md ${
+						csvFile ? 'bg-yellow-highlight bg-opacity-20' : 'bg-white'
+					}`}
 				>
 					<input {...getInputProps()} />
-					{csvFile
-						? `Fichier importé : ${csvFile.name}`
-						: isDragActive
-						? 'Déposez le fichier CSV ici...'
-						: 'Glissez et déposez un fichier CSV ici, ou cliquez pour sélectionner'}
+					{csvFile ? (
+						<p className="text-purple-custom font-semibold">{`Fichier importé : ${csvFile.name}`}</p>
+					) : isDragActive ? (
+						<p className="text-purple-custom">
+							Déposez le fichier CSV ici...
+						</p>
+					) : (
+						<p className="text-purple-custom">
+							Glissez et déposez un fichier CSV ici, ou cliquez pour
+							sélectionner
+						</p>
+					)}
 				</div>
 				{message && <p>{message}</p>}
 				<button type="submit" style={{ marginTop: '10px' }}>
