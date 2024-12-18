@@ -33,15 +33,12 @@ const AddStudent = () => {
 				body: JSON.stringify(student),
 			});
 
-			console.log('Réponse du serveur :', response);
-
 			if (response.ok) {
 				setMessageStudent("L'élève a bien été ajouté");
 				setStudent({
 					nom: '',
 					prenom: '',
 					dateDeNaissance: '',
-					// niveau: '',
 				});
 			} else {
 				alert('Une erreur est survenue');
