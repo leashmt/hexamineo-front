@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { LIST_LEVELS } from '../constants';
+import ButtonSkip from '../components/ButtonSkip';
+import ButtonRepeat from '../components/ButtonRepeat';
+import ButtonReset from '../components/ButtonReset';
 
 const PageVisualisationClasses = () => {
 	const [selectedClass, setSelectedClass] = useState(LIST_LEVELS[0]);
@@ -101,31 +104,29 @@ const PageVisualisationClasses = () => {
 												: "Passage à l'année supérieure"}
 										</p>
 									</div>
-									<div className="space-x-2">
-										<button
-											onClick={() =>
-												updateStudentStatus(student._id, 'skip')
-											}
-											className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-										>
-											Saut de classe
-										</button>
-										<button
-											onClick={() =>
-												updateStudentStatus(student._id, 'repeat')
-											}
-											className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-										>
-											Redoublement
-										</button>
-										<button
-											onClick={() =>
-												updateStudentStatus(student._id, 'pass')
-											}
-											className="px-3 py-1 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
-										>
-											Annuler
-										</button>
+									<div className="space-x-2 w-1/3 flex justify-end">
+										{student.skipGrade ? (
+											<ButtonReset
+												updateStudentStatus={updateStudentStatus}
+												student={student}
+											/>
+										) : (
+											<ButtonSkip
+												updateStudentStatus={updateStudentStatus}
+												student={student}
+											/>
+										)}
+										{student.repeatingGrade ? (
+											<ButtonReset
+												updateStudentStatus={updateStudentStatus}
+												student={student}
+											/>
+										) : (
+											<ButtonRepeat
+												updateStudentStatus={updateStudentStatus}
+												student={student}
+											/>
+										)}
 									</div>
 								</li>
 							))}
