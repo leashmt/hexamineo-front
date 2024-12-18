@@ -11,6 +11,7 @@ const NavBar = () => {
             <Link to="/addStudent" className="hover:text-yellow-highlight">Ajouter des élèves</Link>
             <Link to="/addTeacher" className="hover:text-yellow-highlight">Ajouter des professeurs</Link>
             <Link to="/classes" className="hover:text-yellow-highlight">Visualiser les classes</Link>
+            <Link to="/archives" className="hover:text-yellow-highlight">Archives</Link>
             <Link to="/auth" className="hover:text-yellow-highlight">Login/Register</Link>
           </div>
         </nav>
