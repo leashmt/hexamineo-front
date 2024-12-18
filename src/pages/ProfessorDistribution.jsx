@@ -89,7 +89,7 @@ const ProfessorDistribution = () => {
 	const checkEmptyClasses = obj => {
 		let emptyClasses = [];
 		for (let key in obj) {
-			if (key === 'Non renseigné') {
+			if (key === 'Non renseigné' || key === 'null') {
 				continue;
 			}
 			if (!obj[key]) {
