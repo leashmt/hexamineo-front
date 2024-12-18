@@ -8,6 +8,7 @@ const PageVisualisationClasses = () => {
 	const [selectedClass, setSelectedClass] = useState(LIST_LEVELS[0]);
 	const [filteredStudents, setFilteredStudents] = useState([]);
 	const [allStudents, setAllStudents] = useState([]);
+	const [isValidated, setIsValidated] = useState(false);
 
 	useEffect(() => {
 		const fetchStudents = async () => {
@@ -27,11 +28,13 @@ const PageVisualisationClasses = () => {
 		if (allStudents.length === 0) {
 			return;
 		}
+		setIsValidated(localStorage.getItem(selectedClass) === 'true');
 		const students = allStudents.filter(student => student.niveau === selectedClass);
 		setFilteredStudents(students);
 	}, [selectedClass, allStudents]);
 
 	const updateStudentStatus = (id, statusType) => {
+		setIsValidated(false);
 		const updatedStudents = filteredStudents.map(student => {
 			if (student._id === id) {
 				return {
@@ -43,6 +46,11 @@ const PageVisualisationClasses = () => {
 			return student;
 		});
 		setFilteredStudents(updatedStudents);
+	};
+
+	const handleValidation = () => {
+		localStorage.setItem(selectedClass, 'true');
+		setIsValidated(true);
 	};
 
 	return (
@@ -132,9 +140,18 @@ const PageVisualisationClasses = () => {
 						</ul>
 
 						{/* A mettre seulement avec le rôle directrice */}
-						<div className="flex justify-center mt-6">
+						<div className="flex justify-end mt-6 gap-2 justify-end items-center">
+							{isValidated ? (
+								<p className="text-green-500 text-center">
+									La classe est bien enregistrée
+								</p>
+							) : (
+								<p className="text-red-500 text-center">
+									La classe n'est pas enregistrée
+								</p>
+							)}
 							<button
-								onClick={() => console.log('Validation des élèves')}
+								onClick={handleValidation}
 								className="px-6 py-2 bg-purple-custom text-white font-bold rounded-lg hover:bg-purple-custom-hover transition"
 							>
 								Valider la classe
