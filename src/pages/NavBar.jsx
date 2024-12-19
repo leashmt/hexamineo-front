@@ -74,6 +74,11 @@ const NavBar = () => {
                 >
                   Déconnexion
                 </button>
+                  <>
+                    <Link to="/changePassword" className="hover:text-yellow-highlight">
+                      Changer mon mot de passe
+                    </Link>
+                  </>
               </>
             ) : (
               <Link to="/auth" className="hover:text-purple-custom">
@@ -135,6 +140,11 @@ const NavBar = () => {
                 >
                   Déconnexion
                 </button>
+                <>
+                    <Link to="/changePassword" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Changer mon mot de passe
+                    </Link>
+                  </>
               </>
             ) : (
               <Link to="/auth" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
