@@ -4,13 +4,16 @@ import React, { useState } from 'react'
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const closeMenu = () => {
+        setIsOpen(false)
+    };
     
     return (
         <div className="bg-white-background min-h-screen flex flex-col">
             <header className="py-4 shadow-lg relative">
-                <nav className="container mx-auto flex items-center justify-between px-4">
+                <nav className="container mx-auto flex items-center justify-between px-4 pl-20 pr-20">
                     <div className="flex items-center">
-                        <Link to="/">
+                        <Link to="/" onClick={closeMenu}>
                             <img src="logo.png" alt="Logo" className="h-10 mr-4" />
                         </Link>
                     </div>
@@ -41,12 +44,36 @@ const NavBar = () => {
                     }`}
                 >
                     <div className="px-4 py-2 space-y-2">
-                        <Link to="/addStudent" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">Ajouter des élèves</Link>
-                        <Link to="/addTeacher" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">Ajouter des professeurs</Link>
-                        <Link to="/classes" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">Visualiser les classes</Link>
-                        <Link to="/archives" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">Archives</Link>
-                        <Link to="/professorDistribution" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">Répartition des professeurs</Link>
-                        <Link to="/auth" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">Login/Register</Link>
+                        <Link to="/addStudent"
+                            className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+                            onClick={closeMenu}>
+                            Ajouter des élèves
+                        </Link>
+                        <Link to="/addTeacher"
+                            className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+                            onClick={closeMenu}>
+                            Ajouter des professeurs
+                        </Link>
+                        <Link to="/classes"
+                            className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+                            onClick={closeMenu}>
+                            Visualiser les classes
+                        </Link>
+                        <Link to="/archives"
+                            className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+                            onClick={closeMenu}>
+                            Archives
+                        </Link>
+                        <Link to="/professorDistribution"
+                            className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+                            onClick={closeMenu}>
+                            Répartition des professeurs
+                        </Link>
+                        <Link to="/auth"
+                            className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+                            onClick={closeMenu}>
+                            Login/Register
+                        </Link>
                     </div>
                 </div>
             </header>
