@@ -7,7 +7,12 @@ import ButtonReset from '../components/ButtonReset';
 
 const Classe = () => {
 	const { niveau } = useParams();
-	const [selectedClass, setSelectedClass] = useState(niveau || LIST_LEVELS_LINK[0]);
+	// const [selectedClass, setSelectedClass] = useState(niveau || LIST_LEVELS_LINK[0]);
+	const selectedClass =
+		niveau
+			?.replace(/(\d)eme\b/g, '$1ème') // Remplace "eme" par "ème"
+			.replace(/-/g, ' ') || LIST_LEVELS_LINK[0];
+	console.log(selectedClass);
 	const [filteredStudents, setFilteredStudents] = useState([]);
 	const [allStudents, setAllStudents] = useState([]);
 	const [isValidated, setIsValidated] = useState(false);
@@ -17,7 +22,7 @@ const Classe = () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/eleves', {
 					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
 				if (!response.ok) {
@@ -25,6 +30,7 @@ const Classe = () => {
 				}
 				const data = await response.json();
 				setAllStudents(data);
+				console.log(data);
 			} catch (error) {
 				console.error('Erreur lors de la récupération des élèves:', error);
 			}
