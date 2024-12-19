@@ -17,3 +17,14 @@ export const LIST_LEVELS = [
 	CM1,
 	CM2,
 ];
+
+export const LIST_LEVELS_LINK = [
+	'1ere-section-maternelle',
+	'2eme-section-maternelle',
+	'3eme-section-maternelle',
+	CP,
+	CE1,
+	CE2,
+	CM1,
+	CM2,
+];
