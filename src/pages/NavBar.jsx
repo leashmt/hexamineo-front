@@ -110,12 +110,13 @@ const NavBar = () => {
 
 				{/* Menu mobile */}
 				<div
-					className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-md transition-all duration-300 ease-in-out w-full${
+					className={`lg:hidden absolute top-full left-0 right-0 bg-white-background shadow-md transition-all duration-300 ease-in-out w-full${
 						isOpen
-							? 'max-h-96 opacity-100'
-							: 'max-h-0 opacity-0 overflow-hidden'
+							? 'max-h-96 opacity-100 pointer-events-auto'
+							: 'max-h-0 opacity-0 overflow-hidden pointer-events-none'
 					}`}
 				>
+          {isOpen &&(
 					<div className="px-4 py-2 space-y-2">
 						{user ? (
 							<>
