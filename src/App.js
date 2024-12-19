@@ -6,9 +6,10 @@ import AddStudent from './pages/AddStudent';
 import AddTeacher from './pages/AddTeacher';
 import CloseYear from './pages/CloseYear';
 import CloseYearConfirmation from './pages/CloseYearConfirmation';
-import Classes from './pages/Classes'; 
+import Classes from './pages/Classes';
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
+import Dashboard from './pages/Dashboard';
 
 const router = createBrowserRouter([
 	{
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
 			{
 				path: '/closeYearConfirmation',
 				element: <CloseYearConfirmation />,
+			},
+			{
+				path: '/dashboard',
+				element: <Dashboard />,
 			},
 		],
 	},

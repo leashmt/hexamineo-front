@@ -5,7 +5,6 @@ import ButtonSkip from '../components/ButtonSkip';
 import ButtonRepeat from '../components/ButtonRepeat';
 import ButtonReset from '../components/ButtonReset';
 
-
 const PageVisualisationClasses = () => {
 	const { niveau } = useParams(); // Récupère le niveau actuel depuis l'URL
 	const navigate = useNavigate(); // Permet de naviguer dynamiquement
