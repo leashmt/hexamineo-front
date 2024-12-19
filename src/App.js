@@ -12,6 +12,7 @@ import Archives from './pages/Archives';
 import Classe from './pages/Classe';
 import Dashboard from './pages/Dashboard';
 import ErrorPage from './pages/Error';
+import ChangePassword from './pages/ChangePassword';
 
 const router = createBrowserRouter([
 	{
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
 			{
 				path: '/closeYear',
 				element: <CloseYear />,
+			},
+			{
+				path: '/changePassword',
+				element: <ChangePassword />,
 			},
 			{
 				path: '/closeYearConfirmation',
