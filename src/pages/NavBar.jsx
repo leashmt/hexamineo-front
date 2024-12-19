@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import footerImage from '../imgs/footer-little-prince.png';
-import React, { useState } from 'react';
+import logo from '../imgs/logo.png';
 
 const NavBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ const NavBar = () => {
 				<nav className="container mx-auto flex items-center justify-between px-4">
 					<div className="flex items-center">
 						<Link to="/">
-							<img src="logo.png" alt="Logo" className="h-10 mr-4" />
+							<img src={logo} alt="Logo" className="h-10 mr-4" />
 						</Link>
 					</div>
 					<div className="lg:hidden">
@@ -33,6 +34,9 @@ const NavBar = () => {
 						</Link>
 						<Link to="/classes" className="hover:text-purple-custom">
 							Visualiser les classes
+						</Link>
+						<Link to="/classe" className="hover:text-purple-custom">
+							Classe
 						</Link>
 						<Link to="/archives" className="hover:text-purple-custom">
 							Archives

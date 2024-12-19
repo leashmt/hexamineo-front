@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { LIST_LEVELS } from '../constants';
+import { useParams, useNavigate } from 'react-router-dom';
+import { LIST_LEVELS_LINK } from '../constants';
 import ButtonSkip from '../components/ButtonSkip';
 import ButtonRepeat from '../components/ButtonRepeat';
 import ButtonReset from '../components/ButtonReset';
-import { all } from 'axios';
 
-const PageVisualisationClasses = () => {
-	const [selectedClass, setSelectedClass] = useState(LIST_LEVELS[0]);
+const Classe = () => {
+	const { niveau } = useParams();
+	const [selectedClass, setSelectedClass] = useState(niveau || LIST_LEVELS_LINK[0]);
 	const [filteredStudents, setFilteredStudents] = useState([]);
 	const [allStudents, setAllStudents] = useState([]);
 	const [isValidated, setIsValidated] = useState(false);
@@ -58,29 +59,10 @@ const PageVisualisationClasses = () => {
 	};
 
 	return (
-		<div className=" p-8 ">
+		<div className="p-8">
 			<h1 className="text-3xl font-bold mb-6 text-gray-800">
-				Visualisation des Classes
+				Visualisation de la classe {selectedClass.replace(/-/g, ' ')}
 			</h1>
-
-			{/* A mettre seulement avec le rôle directrice */}
-			<div className="mb-4">
-				<label className="block text-gray-700 font-semibold mb-2">
-					Sélectionnez une classe :
-				</label>
-
-				<select
-					value={selectedClass}
-					onChange={e => setSelectedClass(e.target.value)}
-					className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-				>
-					{LIST_LEVELS.map(level => (
-						<option key={level} value={level}>
-							{level}
-						</option>
-					))}
-				</select>
-			</div>
 
 			<div className="bg-white p-6 rounded-lg shadow-md">
 				{filteredStudents.length === 0 ? (
@@ -93,7 +75,7 @@ const PageVisualisationClasses = () => {
 							{filteredStudents.map(student => (
 								<li
 									key={student._id}
-									className={`flex items-center justify-between p-4 mb-2 rounded-lg border shadow-md${
+									className={`flex items-center justify-between p-4 mb-2 rounded-lg border shadow-md ${
 										student.repeatGrade
 											? 'bg-red-100 border-red-400'
 											: student.skipGrade
@@ -143,8 +125,7 @@ const PageVisualisationClasses = () => {
 							))}
 						</ul>
 
-						{/* A mettre seulement avec le rôle directrice */}
-						<div className="flex justify-end mt-6 gap-2 justify-end items-center">
+						<div className="flex justify-end mt-6 gap-2 items-center">
 							{isValidated ? (
 								<p className="text-green-500 text-center">
 									La classe est bien enregistrée
@@ -168,4 +149,4 @@ const PageVisualisationClasses = () => {
 	);
 };
 
-export default PageVisualisationClasses;
+export default Classe;
