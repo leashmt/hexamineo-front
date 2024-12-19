@@ -11,6 +11,7 @@ import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
 import Classe from './pages/Classe';
 import Dashboard from './pages/Dashboard';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
 	{
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
 			{
 				path: '/dashboard',
 				element: <Dashboard />,
+			},
+			{
+				path: '/error',
+				element: <ErrorPage />,
 			},
 		],
 	},
