@@ -20,14 +20,14 @@ const NavBar = () => {
 						<Link to="/addStudent" className="hover:text-purple-custom">
 							Ajouter des élèves
 						</Link>
-						<Link to="/addTeacher" className="hover:text-purple-custom">
+						<Link to="/addTeacher" className="hover:text-purple-custom">s
 							Ajouter des professeurs
 						</Link>
 						<Link to="/classes" className="hover:text-purple-custom">
 							Visualiser les classes
 						</Link>
 						<Link to="/classe" className="hover:text-purple-custom">
-							classe
+							Classe
 						</Link>
 						<Link to="/archives" className="hover:text-yellow-highlight">
 							Archives
