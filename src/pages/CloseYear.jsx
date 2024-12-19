@@ -16,7 +16,7 @@ const CloseYear = () => {
 				//check professors
 				const response = await fetch('http://localhost:3001/api/professeurs', {
 					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`
+						'Authorization': `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
 				const professeurs = await response.json();
@@ -30,7 +30,7 @@ const CloseYear = () => {
 				const responseEleves = await fetch(
 					'http://localhost:3001/api/eleves/without-level', {
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`
+							'Authorization': `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
