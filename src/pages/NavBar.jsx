@@ -1,5 +1,7 @@
 import { Link, Outlet } from 'react-router-dom';
 import footerImage from '../imgs/footer-little-prince.png';
+import logo from '../imgs/logo.png';
+
 
 const NavBar = () => {
 	return (
@@ -8,7 +10,7 @@ const NavBar = () => {
 				<nav className="container mx-auto flex items-center justify-between">
 					<div className="pr-5 flex items-center">
 						<Link to="/">
-							<img src="logo.png" alt="Logo" className="h-10 mr-4" />
+							<img src={logo} alt="Logo" className="h-10 mr-4" />
 						</Link>
 					</div>
 					<div className="flex space-x-8">

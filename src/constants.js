@@ -1,6 +1,6 @@
-export const FIRST_SECTION = '1ère section maternelle';
-export const SECOND_SECTION = '2ème section maternelle';
-export const THRID_SECTION = '3ème section maternelle';
+export const FIRST_SECTION = '1ère-section-maternelle';
+export const SECOND_SECTION = '2ème-section-maternelle';
+export const THRID_SECTION = '3ème-section-maternelle';
 export const CP = 'CP';
 export const CE1 = 'CE1';
 export const CE2 = 'CE2';
