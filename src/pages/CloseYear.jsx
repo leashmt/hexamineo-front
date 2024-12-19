@@ -35,7 +35,6 @@ const CloseYear = () => {
 				let checkClasses = true;
 				for (let level of LIST_LEVELS) {
 					const valueLocalStorage = localStorage.getItem(level);
-					console.log(valueLocalStorage);
 					if (valueLocalStorage === 'true') {
 						checkClasses = true;
 						continue;
@@ -57,7 +56,6 @@ const CloseYear = () => {
 
 	const handleCloseYear = () => {
 		if (newEleveAdded && classValidate) {
-			console.log('Année clôturée');
 			navigate('/closeYearConfirmation');
 		}
 	};
