@@ -3,16 +3,21 @@ import { LIST_LEVELS } from '../constants';
 import ButtonSkip from '../components/ButtonSkip';
 import ButtonRepeat from '../components/ButtonRepeat';
 import ButtonReset from '../components/ButtonReset';
+import { all } from 'axios';
 
 const PageVisualisationClasses = () => {
 	const [selectedClass, setSelectedClass] = useState(LIST_LEVELS[0]);
 	const [filteredStudents, setFilteredStudents] = useState([]);
 	const [allStudents, setAllStudents] = useState([]);
+	const [isValidated, setIsValidated] = useState(false);
 
 	useEffect(() => {
 		const fetchStudents = async () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/eleves');
+				if (!response.ok) {
+					throw new Error('Erreur lors de la récupération des élèves');
+				}
 				const data = await response.json();
 				setAllStudents(data);
 			} catch (error) {
@@ -27,11 +32,13 @@ const PageVisualisationClasses = () => {
 		if (allStudents.length === 0) {
 			return;
 		}
+		setIsValidated(localStorage.getItem(selectedClass) === 'true');
 		const students = allStudents.filter(student => student.niveau === selectedClass);
 		setFilteredStudents(students);
 	}, [selectedClass, allStudents]);
 
 	const updateStudentStatus = (id, statusType) => {
+		setIsValidated(false);
 		const updatedStudents = filteredStudents.map(student => {
 			if (student._id === id) {
 				return {
@@ -43,6 +50,11 @@ const PageVisualisationClasses = () => {
 			return student;
 		});
 		setFilteredStudents(updatedStudents);
+	};
+
+	const handleValidation = () => {
+		localStorage.setItem(selectedClass, 'true');
+		setIsValidated(true);
 	};
 
 	return (
@@ -132,9 +144,18 @@ const PageVisualisationClasses = () => {
 						</ul>
 
 						{/* A mettre seulement avec le rôle directrice */}
-						<div className="flex justify-center mt-6">
+						<div className="flex justify-end mt-6 gap-2 justify-end items-center">
+							{isValidated ? (
+								<p className="text-green-500 text-center">
+									La classe est bien enregistrée
+								</p>
+							) : (
+								<p className="text-red-500 text-center">
+									La classe n'est pas enregistrée
+								</p>
+							)}
 							<button
-								onClick={() => console.log('Validation des élèves')}
+								onClick={handleValidation}
 								className="px-6 py-2 bg-purple-custom text-white font-bold rounded-lg hover:bg-purple-custom-hover transition"
 							>
 								Valider la classe

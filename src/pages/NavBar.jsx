@@ -5,18 +5,23 @@ const NavBar = () => {
 	return (
 		<div className="bg-white-background min-h-screen flex flex-col">
 			<header className="py-4 shadow-lg">
-				<nav className="flex justify-center space-x-6 text-lg">
-					<div className="flex space-x-8">
-						<Link to="/" className="hover:text-yellow-highlight">
-							Accueil
+				<nav className="container mx-auto flex items-center justify-between">
+					<div className="pr-5 flex items-center">
+						<Link to="/">
+							<img src="logo.png" alt="Logo" className="h-10 mr-4" />
 						</Link>
-						<Link to="/addStudent" className="hover:text-yellow-highlight">
+					</div>
+					<div className="flex space-x-8">
+						{/* <Link to="/" className="hover:text-purple-custom">
+							Accueil
+						</Link> */}
+						<Link to="/addStudent" className="hover:text-purple-custom">
 							Ajouter des élèves
 						</Link>
-						<Link to="/addTeacher" className="hover:text-yellow-highlight">
+						<Link to="/addTeacher" className="hover:text-purple-custom">
 							Ajouter des professeurs
 						</Link>
-						<Link to="/classes" className="hover:text-yellow-highlight">
+						<Link to="/classes" className="hover:text-purple-custom">
 							Visualiser les classes
 						</Link>
 						<Link to="/archives" className="hover:text-yellow-highlight">
@@ -28,7 +33,7 @@ const NavBar = () => {
 						>
 							Répartition des professeurs
 						</Link>
-						<Link to="/auth" className="hover:text-yellow-highlight">
+						<Link to="/auth" className="hover:text-purple-custom">
 							Login/Register
 						</Link>
 					</div>

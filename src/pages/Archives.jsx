@@ -80,7 +80,7 @@ const Archives = () => {
 									{student.prenom} {student.nom}
 								</p>
 								<p className="w-1/4 text-start italic">
-									{student.profName || student.prof.nom}
+									{student.profName}
 								</p>
 								<p className="italic text-gray-500 w-1/4 flex justify-end ">
 									{student.niveau} - {student.year}
