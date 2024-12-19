@@ -70,7 +70,7 @@ const router = createBrowserRouter([
 				element: <Authentification />,
 			},
 			{
-				path: '/error',
+				path: '/error/:statusCode',
 				element: <ErrorPage />,
 			},
 		],

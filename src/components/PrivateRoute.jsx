@@ -6,13 +6,13 @@ const PrivateRoute = ({element, allowedRoles, ...rest}) => {
     console.log(token)
 
     if (!token) {
-        return <Navigate to="/auth" />
+        return <Navigate to="/error/401" />
     }
 
     const decodedToken = jwtDecode(token)
     const userRole = decodedToken.role
     if (!allowedRoles.includes(userRole)) {
-        return <Navigate to="/access-denied"/>
+        return <Navigate to="/error/403"/>
     }
 
     return element
