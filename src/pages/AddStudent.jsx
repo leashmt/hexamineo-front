@@ -29,7 +29,7 @@ const AddStudent = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
+					Authorization: `Bearer ${localStorage.getItem('token')}`,
 				},
 				body: JSON.stringify(student),
 			});
@@ -65,7 +65,7 @@ const AddStudent = () => {
 			const response = await fetch('http://localhost:3001/api/import-csv', {
 				method: 'POST',
 				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
+					Authorization: `Bearer ${localStorage.getItem('token')}`,
 				},
 				body: formData,
 			});
@@ -208,7 +208,7 @@ const AddStudent = () => {
 				)}
 				<button
 					type="submit"
-					className="bg-purple-custom hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none w-full mt-3"
+					className="bg-purple-custom hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none w-full mt-3 mb-16"
 				>
 					Importer le fichier CSV
 				</button>
