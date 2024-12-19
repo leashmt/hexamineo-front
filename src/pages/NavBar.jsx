@@ -33,6 +33,9 @@ const NavBar = () => {
 						>
 							Répartition des professeurs
 						</Link>
+						<Link to="/dashboard" className="hover:text-yellow-highlight">
+							Dashboard
+						</Link>
 						<Link to="/auth" className="hover:text-purple-custom">
 							Login/Register
 						</Link>

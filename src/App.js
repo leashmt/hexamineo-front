@@ -10,6 +10,7 @@ import Example from './pages/Example';
 import Classes from './pages/Classes';
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
+import Dashboard from './pages/Dashboard';
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
 			{
 				path: '/closeYearConfirmation',
 				element: <CloseYearConfirmation />,
+			},
+			{
+				path: '/dashboard',
+				element: <Dashboard />,
 			},
 		],
 	},
