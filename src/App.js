@@ -9,6 +9,7 @@ import CloseYearConfirmation from './pages/CloseYearConfirmation';
 import Classes from './pages/Classes'; 
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
+import Classe from './pages/Classe';
 
 const router = createBrowserRouter([
 	{
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
 				element: <Classes />,
 			},
 			{
-				path: '/classes/:niveau',
-				element: <Classes />,
+				path: '/classe',
+				element: <Classe />,
+			},
+			{
+				path: '/classe/:niveau',
+				element: <Classe />,
 			},
 			{
 				path: '/professorDistribution',

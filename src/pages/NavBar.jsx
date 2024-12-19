@@ -26,6 +26,9 @@ const NavBar = () => {
 						<Link to="/classes" className="hover:text-purple-custom">
 							Visualiser les classes
 						</Link>
+						<Link to="/classe" className="hover:text-purple-custom">
+							classe
+						</Link>
 						<Link to="/archives" className="hover:text-yellow-highlight">
 							Archives
 						</Link>
