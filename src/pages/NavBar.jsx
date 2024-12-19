@@ -7,14 +7,15 @@ import logo from '../imgs/logo.png';
 
 const NavBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
-  const { user } = useContext(UserContext);
+	const { user } = useContext(UserContext);
+	const closeMenu = () => {setIsOpen(false)};
 
 	return (
 		<div className="bg-white-background min-h-screen flex flex-col">
 			<header className="py-4 shadow-lg relative">
 				<nav className="container mx-auto flex items-center justify-between px-4">
 					<div className="flex items-center">
-						<Link to="/">
+						<Link to="/" onClick={closeMenu}>
 							<img src={logo} alt="Logo" className="h-10 mr-4" />
 						</Link>
 					</div>
@@ -62,8 +63,11 @@ const NavBar = () => {
                     <Link to="/dashboard" className="hover:text-yellow-highlight">
                       Dashboard
                     </Link>
-                  </>
-                )}
+									</>
+								)}
+								<Link to="/changePassword" className="hover:text-yellow-highlight">
+                    Changer mon mot de passe
+                </Link>
                 <p className="text-gray-700">Bonjour {user.name}</p>
                 <button
                   onClick={() => {
@@ -74,11 +78,6 @@ const NavBar = () => {
                 >
                   Déconnexion
                 </button>
-                  <>
-                    <Link to="/changePassword" className="hover:text-yellow-highlight">
-                      Changer mon mot de passe
-                    </Link>
-                  </>
               </>
             ) : (
               <Link to="/auth" className="hover:text-purple-custom">
@@ -90,7 +89,7 @@ const NavBar = () => {
 
 				{/* Menu mobile */}
 				<div
-					className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-md transition-all duration-300 ease-in-out ${
+					className={`lg:hidden absolute top-full left-0 right-0 bg-white shadow-md transition-all duration-300 ease-in-out w-full${
 						isOpen
 							? 'max-h-96 opacity-100'
 							: 'max-h-0 opacity-0 overflow-hidden'
@@ -102,35 +101,38 @@ const NavBar = () => {
                 <p className="text-purple-custom">Bonjour {user.name}</p>
                 {["ADMIN", "MAIRIE"].includes(user.role) && (
                   <>
-                    <Link to="/addStudent" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                    <Link to="/addStudent" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                       Ajouter des élèves
                     </Link>
-                    <Link to="/addTeacher" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                    <Link to="/addTeacher" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                       Ajouter des professeurs
                     </Link>
-                    <Link to="/archives" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                    <Link to="/archives" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                       Archives
                     </Link>
                   </>
                 )}
                 {["ADMIN", "DIRECTRICE"].includes(user.role) && (
                   <>
-                    <Link to="/classes" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                    <Link to="/classes" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                       Visualiser les classes
                     </Link>
                     <Link
-                      to="/professorDistribution" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      to="/professorDistribution" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                       Répartition des professeurs
                     </Link>
                   </>
                 )}
                 {["ADMIN"].includes(user.role) && (
                   <>
-                    <Link to="/dashboard" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                    <Link to="/dashboard" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                       Dashboard
                     </Link>
                   </>
-                )}
+								)}
+								<Link to="/changePassword" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                    Changer mon mot de passe
+                </Link>
                 <button
                   onClick={() => {
                     localStorage.clear();
@@ -140,14 +142,10 @@ const NavBar = () => {
                 >
                   Déconnexion
                 </button>
-                <>
-                    <Link to="/changePassword" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Changer mon mot de passe
-                    </Link>
-                  </>
+
               </>
             ) : (
-              <Link to="/auth" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+              <Link to="/auth" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
                 Login
               </Link>
             )}
