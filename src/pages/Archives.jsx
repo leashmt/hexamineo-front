@@ -30,7 +30,7 @@ const Archives = () => {
 	const uniqueLevels = [...new Set(archivedStudents.map(student => student.niveau))];
 
 	return (
-		<div className="min-h-screen bg-gray-100 p-8">
+		<div className=" p-8">
 			<h1 className="text-3xl font-bold mb-6 text-gray-800">Archives des élèves</h1>
 
 			<div className="flex flex-wrap mb-6 space-x-4">
@@ -80,7 +80,7 @@ const Archives = () => {
 									{student.prenom} {student.nom}
 								</p>
 								<p className="w-1/4 text-start italic">
-									{student.profName || student.prof.nom}
+									{student.profName}
 								</p>
 								<p className="italic text-gray-500 w-1/4 flex justify-end ">
 									{student.niveau} - {student.year}
