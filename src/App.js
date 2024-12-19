@@ -10,6 +10,7 @@ import CloseYearConfirmation from './pages/CloseYearConfirmation';
 import Classes from './pages/Classes';
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
+import Classe from './pages/Classe';
 import Dashboard from './pages/Dashboard';
 import Authentification from "./pages/Authentification";
 import PrivateRoute from './components/PrivateRoute';
@@ -26,6 +27,14 @@ const router = createBrowserRouter([
 			{
 				path: '/classes',
 				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<Classes />} />)
+			},
+			{
+				path: '/classe',
+				element: <Classe />,
+			},
+			{
+				path: '/classe/:niveau',
+				element: <Classe />,
 			},
 			{
 				path: '/professorDistribution',
