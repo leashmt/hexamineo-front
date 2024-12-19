@@ -21,7 +21,11 @@ const ProfessorDistribution = () => {
 
 		const fetchProfesseurs = async () => {
 			try {
-				const response = await fetch('http://localhost:3001/api/professeurs');
+				const response = await fetch('http://localhost:3001/api/professeurs', {
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('token')}`
+					},
+				});
 				const data = await response.json();
 				for (let prof of data) {
 					if (prof.niveau === 'Non renseigné') {
@@ -72,11 +76,12 @@ const ProfessorDistribution = () => {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
+						'Authorization': `Bearer ${localStorage.getItem('token')}`
+
 					},
 					body: JSON.stringify(attribution),
 				}
 			);
-
 			const data = await response.json();
 			if (response.ok) {
 				console.log('Niveaux mis à jour :', data);

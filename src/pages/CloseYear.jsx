@@ -14,7 +14,11 @@ const CloseYear = () => {
 			setIsLoading(true);
 			try {
 				//check professors
-				const response = await fetch('http://localhost:3001/api/professeurs');
+				const response = await fetch('http://localhost:3001/api/professeurs', {
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('token')}`
+					},
+				});
 				const professeurs = await response.json();
 
 				const allLevelsAssigned = LIST_LEVELS.every(level =>
@@ -24,7 +28,11 @@ const CloseYear = () => {
 
 				// check new students
 				const responseEleves = await fetch(
-					'http://localhost:3001/api/eleves/without-level'
+					'http://localhost:3001/api/eleves/without-level', {
+						headers: {
+							'Authorization': `Bearer ${localStorage.getItem('token')}`
+						},
+					}
 				);
 				const eleves = await responseEleves.json();
 

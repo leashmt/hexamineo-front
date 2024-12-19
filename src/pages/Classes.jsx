@@ -14,7 +14,11 @@ const PageVisualisationClasses = () => {
 	useEffect(() => {
 		const fetchStudents = async () => {
 			try {
-				const response = await fetch('http://localhost:3001/api/eleves');
+				const response = await fetch('http://localhost:3001/api/eleves', {
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('token')}`
+					}
+				});
 				if (!response.ok) {
 					throw new Error('Erreur lors de la récupération des élèves');
 				}

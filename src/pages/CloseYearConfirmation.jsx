@@ -18,6 +18,9 @@ const CloseYearConfirmation = () => {
 					`http://localhost:3001/api/archive/${year}/all`,
 					{
 						method: 'POST',
+						headers: {
+							'Authorization': `Bearer ${localStorage.getItem('token')}`
+						},
 					}
 				);
 				setArchivageStatus(responseArchive.ok);
@@ -30,6 +33,9 @@ const CloseYearConfirmation = () => {
 					`http://localhost:3001/api/eleves/assign`,
 					{
 						method: 'PUT',
+						headers: {
+							'Authorization': `Bearer ${localStorage.getItem('token')}`
+						},
 					}
 				);
 				setPassagesStatus(responsePassages.ok);
@@ -42,6 +48,9 @@ const CloseYearConfirmation = () => {
 					`http://localhost:3001/api/professeurs/assign`,
 					{
 						method: 'PUT',
+						headers: {
+							'Authorization': `Bearer ${localStorage.getItem('token')}`
+						},
 					}
 				);
 				setAffectationProfsStatus(responseProfesseurs.ok);

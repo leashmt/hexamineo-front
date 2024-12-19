@@ -8,7 +8,11 @@ const Archives = () => {
 	useEffect(() => {
 		const fetchStudents = async () => {
 			try {
-				const response = await fetch('http://localhost:3001/api/archive');
+				const response = await fetch('http://localhost:3001/api/archive', {
+					headers: {
+						'Authorization': `Bearer ${localStorage.getItem('token')}`
+					},
+				});
 				const data = await response.json();
 				setArchivedStudents(data);
 			} catch (error) {
