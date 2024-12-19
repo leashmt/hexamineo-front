@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { Link, Outlet } from "react-router-dom";
-import footerImage from "../imgs/footer-little-prince.png";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import footerImage from '../imgs/footer-little-prince.png';
+import { UserContext } from '../context/UserContext';
+import { useContext } from 'react';
 import logo from '../imgs/logo.png';
 
 const NavBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { user } = useContext(UserContext);
-	const closeMenu = () => {setIsOpen(false)};
+	const { pathname } = useLocation();
+	const closeMenu = () => {
+		setIsOpen(false);
+	};
 
 	return (
 		<div className="bg-white-background min-h-screen flex flex-col">
@@ -30,61 +33,79 @@ const NavBar = () => {
 
 					{/* Menu pour desktop */}
 					<div className="hidden lg:flex space-x-4 lg:space-x-8 items-center">
-          {user ? (
-              <>
-                {["ADMIN", "MAIRIE"].includes(user.role) && (
-                  <>
-                    <Link to="/addStudent" className="hover:text-purple-custom">
-                      Ajouter des élèves
-                    </Link>
-                    <Link to="/addTeacher" className="hover:text-purple-custom">
-                      Ajouter des professeurs
-                    </Link>
-                    <Link to="/archives" className="hover:text-yellow-highlight">
-                      Archives
-                    </Link>
-                  </>
-                )}
-                {["ADMIN", "DIRECTRICE"].includes(user.role) && (
-                  <>
-                    <Link to="/classes" className="hover:text-purple-custom">
-                      Visualiser les classes
-                    </Link>
-                    <Link
-                      to="/professorDistribution"
-                      className="hover:text-yellow-highlight"
-                    >
-                      Répartition des professeurs
-                    </Link>
-                  </>
-                )}
-                {["ADMIN"].includes(user.role) && (
-                  <>
-                    <Link to="/dashboard" className="hover:text-yellow-highlight">
-                      Dashboard
-                    </Link>
+						{user ? (
+							<>
+								{['ADMIN', 'MAIRIE'].includes(user.role) && (
+									<>
+										<Link
+											to="/addStudent"
+											className="hover:text-purple-custom"
+										>
+											Ajouter des élèves
+										</Link>
+										<Link
+											to="/addTeacher"
+											className="hover:text-purple-custom"
+										>
+											Ajouter des professeurs
+										</Link>
+										<Link
+											to="/archives"
+											className="hover:text-yellow-highlight"
+										>
+											Archives
+										</Link>
 									</>
 								)}
-								<Link to="/changePassword" className="hover:text-yellow-highlight">
-                    Changer mon mot de passe
-                </Link>
-                <p className="text-gray-700">Bonjour {user.name}</p>
-                <button
-                  onClick={() => {
-                    localStorage.clear();
-                    window.location.reload();
-                  }}
-                  className="hover:text-red-500"
-                >
-                  Déconnexion
-                </button>
-              </>
-            ) : (
-              <Link to="/auth" className="hover:text-purple-custom">
-                Login
-              </Link>
-            )}
-          </div>
+								{['ADMIN', 'DIRECTRICE'].includes(user.role) && (
+									<>
+										<Link
+											to="/classes"
+											className="hover:text-purple-custom"
+										>
+											Visualiser les classes
+										</Link>
+										<Link
+											to="/professorDistribution"
+											className="hover:text-yellow-highlight"
+										>
+											Répartition des professeurs
+										</Link>
+									</>
+								)}
+								{['ADMIN'].includes(user.role) && (
+									<>
+										<Link
+											to="/dashboard"
+											className="hover:text-yellow-highlight"
+										>
+											Dashboard
+										</Link>
+									</>
+								)}
+								<Link
+									to="/changePassword"
+									className="hover:text-yellow-highlight"
+								>
+									Changer mon mot de passe
+								</Link>
+								<p className="text-gray-700">Bonjour {user.name}</p>
+								<button
+									onClick={() => {
+										localStorage.clear();
+										window.location.reload();
+									}}
+									className="hover:text-red-500"
+								>
+									Déconnexion
+								</button>
+							</>
+						) : (
+							<Link to="/auth" className="hover:text-purple-custom">
+								Login
+							</Link>
+						)}
+					</div>
 				</nav>
 
 				{/* Menu mobile */}
@@ -96,81 +117,116 @@ const NavBar = () => {
 					}`}
 				>
 					<div className="px-4 py-2 space-y-2">
-          {user ? (
-              <>
-                <p className="text-purple-custom">Bonjour {user.name}</p>
-                {["ADMIN", "MAIRIE"].includes(user.role) && (
-                  <>
-                    <Link to="/addStudent" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Ajouter des élèves
-                    </Link>
-                    <Link to="/addTeacher" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Ajouter des professeurs
-                    </Link>
-                    <Link to="/archives" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Archives
-                    </Link>
-                  </>
-                )}
-                {["ADMIN", "DIRECTRICE"].includes(user.role) && (
-                  <>
-                    <Link to="/classes" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Visualiser les classes
-                    </Link>
-                    <Link
-                      to="/professorDistribution" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Répartition des professeurs
-                    </Link>
-                  </>
-                )}
-                {["ADMIN"].includes(user.role) && (
-                  <>
-                    <Link to="/dashboard" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                      Dashboard
-                    </Link>
-                  </>
+						{user ? (
+							<>
+								<p className="text-purple-custom">Bonjour {user.name}</p>
+								{['ADMIN', 'MAIRIE'].includes(user.role) && (
+									<>
+										<Link
+											to="/addStudent"
+											onClick={closeMenu}
+											className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+										>
+											Ajouter des élèves
+										</Link>
+										<Link
+											to="/addTeacher"
+											onClick={closeMenu}
+											className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+										>
+											Ajouter des professeurs
+										</Link>
+										<Link
+											to="/archives"
+											onClick={closeMenu}
+											className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+										>
+											Archives
+										</Link>
+									</>
 								)}
-								<Link to="/changePassword" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                    Changer mon mot de passe
-                </Link>
-                <button
-                  onClick={() => {
-                    localStorage.clear();
-                    window.location.reload();
-                  }}
-                  className="hover:text-red-500"
-                >
-                  Déconnexion
-                </button>
-
-              </>
-            ) : (
-              <Link to="/auth" onClick={closeMenu} className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
-                Login
-              </Link>
-            )}
-          </div>
+								{['ADMIN', 'DIRECTRICE'].includes(user.role) && (
+									<>
+										<Link
+											to="/classes"
+											onClick={closeMenu}
+											className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+										>
+											Visualiser les classes
+										</Link>
+										<Link
+											to="/professorDistribution"
+											onClick={closeMenu}
+											className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+										>
+											Répartition des professeurs
+										</Link>
+									</>
+								)}
+								{['ADMIN'].includes(user.role) && (
+									<>
+										<Link
+											to="/dashboard"
+											onClick={closeMenu}
+											className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+										>
+											Dashboard
+										</Link>
+									</>
+								)}
+								<Link
+									to="/changePassword"
+									onClick={closeMenu}
+									className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+								>
+									Changer mon mot de passe
+								</Link>
+								<button
+									onClick={() => {
+										localStorage.clear();
+										window.location.reload();
+									}}
+									className="hover:text-red-500"
+								>
+									Déconnexion
+								</button>
+							</>
+						) : (
+							<Link
+								to="/auth"
+								onClick={closeMenu}
+								className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
+							>
+								Login
+							</Link>
+						)}
+					</div>
 				</div>
 			</header>
 
 			<main className="flex-grow">
 				<Outlet />
 			</main>
-			<div className="flex w-full">
-				<img
-					src={footerImage}
-					alt="Silhouette du petit prince"
-					className="w-full object-cover"
-				/>
-			</div>
-			<footer className="w-full bg-purple-custom text-white py-4">
-				<div className="container mx-auto">
-					<p>@2024 Hexamineo. Tous droits réservés.</p>
-				</div>
-			</footer>
+			{pathname === '/auth' ? (
+				<></>
+			) : (
+				<>
+					<div className="flex w-full">
+						<img
+							src={footerImage}
+							alt="Silhouette du petit prince"
+							className="w-full object-cover"
+						/>
+					</div>
+					<footer className="w-full bg-purple-custom text-white py-4">
+						<div className="container mx-auto">
+							<p>@2024 Hexamineo. Tous droits réservés.</p>
+						</div>
+					</footer>
+				</>
+			)}
 		</div>
 	);
 };
 
 export default NavBar;
-
