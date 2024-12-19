@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { UserProvider } from "./context/UserContext"
 import './App.css';
 import Home from './pages/Home';
 import NavBar from './pages/NavBar';
@@ -66,7 +67,9 @@ const router = createBrowserRouter([
 function App() {
 	return (
 		<div className="App">
-			<RouterProvider router={router} />
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
 		</div>
 	);
 }

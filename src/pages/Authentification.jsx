@@ -16,9 +16,13 @@ const Authentification = () => {
     e.preventDefault();
     try {
       const response = await login(formData.email, formData.password);
+      console.log(response)
       setMessage(response.data.message);
-      localStorage.setItem("token", response.data.token);
-      window.location.href = "/"; // Redirige vers la page d'accueil
+      if (response.data.token){
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user))
+      }
+      window.location.href = "/";
     } catch (error) {
       setMessage(error.response?.data?.message || "Erreur inconnue");
     }
@@ -76,9 +80,9 @@ const Authentification = () => {
             </button>
           </form>
 
-          {message && (
-            <p className="mt-4 text-center text-green-500 font-medium">{message}</p>
-          )}
+          {message && 
+            <p className="mt-4 text-center text-red-500 font-medium">{message}</p>
+          }
         </div>
       </div>
     </div>

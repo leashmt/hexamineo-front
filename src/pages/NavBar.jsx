@@ -1,7 +1,11 @@
 import { Link, Outlet } from 'react-router-dom';
 import footerImage from '../imgs/footer-little-prince.png';
+import { UserContext } from '../context/UserContext';
+import {useContext, UseContext} from "react"
 
 const NavBar = () => {
+  const {user} = useContext(UserContext)
+
 	return (
 		<div className="bg-white-background min-h-screen flex flex-col">
 			<header className="py-4 shadow-lg">
@@ -36,9 +40,14 @@ const NavBar = () => {
 						<Link to="/dashboard" className="hover:text-yellow-highlight">
 							Dashboard
 						</Link>
-						<Link to="/auth" className="hover:text-purple-custom">
-							Login/Register
-						</Link>
+            {user ? (
+              <p>Bonjour {user.name}</p>
+            ):
+              <Link to="/auth" className="hover:text-purple-custom">
+						  	Login
+						  </Link>
+            }
+						
 					</div>
 				</nav>
 			</header>
