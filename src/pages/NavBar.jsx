@@ -50,7 +50,7 @@ const NavBar = () => {
                                         </Link>
                                         <Link
                                             to="/archives"
-                                            className="hover:text-yellow-highlight"
+                                            className="hover:text-purple-custom"
                                         >
                                             Archives
                                         </Link>
@@ -66,7 +66,7 @@ const NavBar = () => {
                                         </Link>
                                         <Link
                                             to="/professorDistribution"
-                                            className="hover:text-yellow-highlight"
+                                            className="hover:text-purple-custom"
                                         >
                                             Répartition des professeurs
                                         </Link>
@@ -75,14 +75,14 @@ const NavBar = () => {
                                 {user.role === 'ADMIN' && (
                                     <Link
                                         to="/dashboard"
-                                        className="hover:text-yellow-highlight"
+                                        className="hover:text-purple-custom"
                                     >
                                         Dashboard
                                     </Link>
                                 )}
                                 <Link
                                     to="/changePassword"
-                                    className="hover:text-yellow-highlight"
+                                    className="hover:text-purple-custom"
                                 >
                                     Changer mon mot de passe
                                 </Link>
