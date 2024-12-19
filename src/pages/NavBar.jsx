@@ -30,7 +30,7 @@ const NavBar = () => {
 							Ajouter des élèves
 						</Link>
 						<Link to="/addTeacher" className="hover:text-purple-custom">
-							s Ajouter des professeurs
+							Ajouter des professeurs
 						</Link>
 						<Link to="/classes" className="hover:text-purple-custom">
 							Visualiser les classes

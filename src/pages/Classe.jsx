@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { LIST_LEVELS } from '../constants';
+import { LIST_LEVELS_LINK } from '../constants';
 import ButtonSkip from '../components/ButtonSkip';
 import ButtonRepeat from '../components/ButtonRepeat';
 import ButtonReset from '../components/ButtonReset';
 
-
 const Classe = () => {
-	const { niveau } = useParams(); 
-	const navigate = useNavigate(); 
-	const [selectedClass, setSelectedClass] = useState(niveau || LIST_LEVELS[0]);
+	const { niveau } = useParams();
+	const [selectedClass, setSelectedClass] = useState(niveau || LIST_LEVELS_LINK[0]);
 	const [filteredStudents, setFilteredStudents] = useState([]);
 	const [allStudents, setAllStudents] = useState([]);
 	const [isValidated, setIsValidated] = useState(false);
@@ -60,35 +58,11 @@ const Classe = () => {
 		setIsValidated(true);
 	};
 
-	const handleClassChange = e => {
-		const newClass = e.target.value;
-		setSelectedClass(newClass);
-		navigate(`/classe/${newClass}`); 
-	};
-
 	return (
 		<div className="p-8">
 			<h1 className="text-3xl font-bold mb-6 text-gray-800">
-				Visualisation des Classes
+				Visualisation de la classe {selectedClass.replace(/-/g, ' ')}
 			</h1>
-
-			<div className="mb-4">
-				<label className="block text-gray-700 font-semibold mb-2">
-					Sélectionnez une classe :
-				</label>
-
-				<select
-					value={selectedClass}
-					onChange={handleClassChange} 
-					className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-				>
-					{LIST_LEVELS.map(level => (
-						<option key={level} value={level}>
-							{level}
-						</option>
-					))}
-				</select>
-			</div>
 
 			<div className="bg-white p-6 rounded-lg shadow-md">
 				{filteredStudents.length === 0 ? (
@@ -150,7 +124,7 @@ const Classe = () => {
 								</li>
 							))}
 						</ul>
-						
+
 						<div className="flex justify-end mt-6 gap-2 items-center">
 							{isValidated ? (
 								<p className="text-green-500 text-center">
