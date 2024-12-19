@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { UserProvider } from "./context/UserContext"
 import './App.css';
 import Home from './pages/Home';
 import NavBar from './pages/NavBar';
@@ -11,6 +12,8 @@ import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
 import Classe from './pages/Classe';
 import Dashboard from './pages/Dashboard';
+import Authentification from "./pages/Authentification";
+import PrivateRoute from './components/PrivateRoute';
 import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
@@ -24,7 +27,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/classes',
-				element: <Classes />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<Classes />} />)
 			},
 			{
 				path: '/classe',
@@ -36,34 +39,38 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/professorDistribution',
-				element: <ProfessorDistribution />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<ProfessorDistribution />} />)
 			},
 			{
 				path: '/addStudent',
-				element: <AddStudent />,
+        element: (<PrivateRoute allowedRoles={["ADMIN", "MAIRIE"]} element={<AddStudent />} />)
 			},
 			{
 				path: '/addTeacher',
-				element: <AddTeacher />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "MAIRIE"]} element={<AddTeacher />} />)
 			},
 			{
 				path: '/archives',
-				element: <Archives />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "MAIRIE"]} element={<Archives />} />)
 			},
 			{
 				path: '/closeYear',
-				element: <CloseYear />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<CloseYear />} />)
 			},
 			{
 				path: '/closeYearConfirmation',
-				element: <CloseYearConfirmation />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<CloseYearConfirmation />} />)
 			},
 			{
 				path: '/dashboard',
-				element: <Dashboard />,
+				element: (<PrivateRoute allowedRoles={["ADMIN"]} element={<Dashboard />} />),
+			},
+      {
+				path: '/auth',
+				element: <Authentification />,
 			},
 			{
-				path: '/error',
+				path: '/error/:statusCode',
 				element: <ErrorPage />,
 			},
 		],
@@ -73,7 +80,9 @@ const router = createBrowserRouter([
 function App() {
 	return (
 		<div className="App">
-			<RouterProvider router={router} />
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
 		</div>
 	);
 }

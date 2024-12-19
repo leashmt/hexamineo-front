@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import footerImage from '../imgs/footer-little-prince.png';
+import { Link, Outlet } from "react-router-dom";
+import footerImage from "../imgs/footer-little-prince.png";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 import logo from '../imgs/logo.png';
 
 const NavBar = () => {
 	const [isOpen, setIsOpen] = useState(false);
+  const { user } = useContext(UserContext);
 
 	return (
 		<div className="bg-white-background min-h-screen flex flex-col">
@@ -26,34 +29,58 @@ const NavBar = () => {
 
 					{/* Menu pour desktop */}
 					<div className="hidden lg:flex space-x-4 lg:space-x-8 items-center">
-						<Link to="/addStudent" className="hover:text-purple-custom">
-							Ajouter des élèves
-						</Link>
-						<Link to="/addTeacher" className="hover:text-purple-custom">
-							Ajouter des professeurs
-						</Link>
-						<Link to="/classes" className="hover:text-purple-custom">
-							Visualiser les classes
-						</Link>
-						<Link to="/classe" className="hover:text-purple-custom">
-							Classe
-						</Link>
-						<Link to="/archives" className="hover:text-purple-custom">
-							Archives
-						</Link>
-						<Link
-							to="/professorDistribution"
-							className="hover:text-purple-custom"
-						>
-							Répartition des professeurs
-						</Link>
-						<Link to="/dashboard" className="hover:text-yellow-highlight">
-							Dashboard
-						</Link>
-						<Link to="/auth" className="hover:text-purple-custom">
-							Login/Register
-						</Link>
-					</div>
+          {user ? (
+              <>
+                {["ADMIN", "MAIRIE"].includes(user.role) && (
+                  <>
+                    <Link to="/addStudent" className="hover:text-purple-custom">
+                      Ajouter des élèves
+                    </Link>
+                    <Link to="/addTeacher" className="hover:text-purple-custom">
+                      Ajouter des professeurs
+                    </Link>
+                    <Link to="/archives" className="hover:text-yellow-highlight">
+                      Archives
+                    </Link>
+                  </>
+                )}
+                {["ADMIN", "DIRECTRICE"].includes(user.role) && (
+                  <>
+                    <Link to="/classes" className="hover:text-purple-custom">
+                      Visualiser les classes
+                    </Link>
+                    <Link
+                      to="/professorDistribution"
+                      className="hover:text-yellow-highlight"
+                    >
+                      Répartition des professeurs
+                    </Link>
+                  </>
+                )}
+                {["ADMIN"].includes(user.role) && (
+                  <>
+                    <Link to="/dashboard" className="hover:text-yellow-highlight">
+                      Dashboard
+                    </Link>
+                  </>
+                )}
+                <p className="text-gray-700">Bonjour {user.name}</p>
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                  className="hover:text-red-500"
+                >
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <Link to="/auth" className="hover:text-purple-custom">
+                Login
+              </Link>
+            )}
+          </div>
 				</nav>
 
 				{/* Menu mobile */}
@@ -65,43 +92,56 @@ const NavBar = () => {
 					}`}
 				>
 					<div className="px-4 py-2 space-y-2">
-						<Link
-							to="/addStudent"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							Ajouter des élèves
-						</Link>
-						<Link
-							to="/addTeacher"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							Ajouter des professeurs
-						</Link>
-						<Link
-							to="/classes"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							Visualiser les classes
-						</Link>
-						<Link
-							to="/archives"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							Archives
-						</Link>
-						<Link
-							to="/professorDistribution"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							Répartition des professeurs
-						</Link>
-						<Link
-							to="/auth"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							Login/Register
-						</Link>
-					</div>
+          {user ? (
+              <>
+                <p className="text-purple-custom">Bonjour {user.name}</p>
+                {["ADMIN", "MAIRIE"].includes(user.role) && (
+                  <>
+                    <Link to="/addStudent" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Ajouter des élèves
+                    </Link>
+                    <Link to="/addTeacher" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Ajouter des professeurs
+                    </Link>
+                    <Link to="/archives" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Archives
+                    </Link>
+                  </>
+                )}
+                {["ADMIN", "DIRECTRICE"].includes(user.role) && (
+                  <>
+                    <Link to="/classes" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Visualiser les classes
+                    </Link>
+                    <Link
+                      to="/professorDistribution" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Répartition des professeurs
+                    </Link>
+                  </>
+                )}
+                {["ADMIN"].includes(user.role) && (
+                  <>
+                    <Link to="/dashboard" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                      Dashboard
+                    </Link>
+                  </>
+                )}
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                  className="hover:text-red-500"
+                >
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <Link to="/auth" className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200">
+                Login
+              </Link>
+            )}
+          </div>
 				</div>
 			</header>
 
@@ -125,3 +165,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
