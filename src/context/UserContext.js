@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { checkTokenValidity } from "../api/auth";
+import {jwtDecode} from 'jwt-decode';
 
 export const UserContext = createContext();
 
@@ -15,11 +16,10 @@ export const UserProvider = ({ children }) => {
         try {
           //const valid = await checkTokenValidity(token);
           //if (valid) {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-          setUser(JSON.parse(storedUser));
-        }
-
+            const decodedToken = jwtDecode(token)
+            if (decodedToken) {
+              setUser(decodedToken);
+            }
           //} else {
           //  clearUserData();
           //}
@@ -27,7 +27,7 @@ export const UserProvider = ({ children }) => {
           console.error("Erreur lors de la vérification du token:", error);
           clearUserData();
         }
-      }
+    }
       setIsLoading(false);
     };
 

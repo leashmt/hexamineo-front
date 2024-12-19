@@ -7,13 +7,12 @@ import AddStudent from './pages/AddStudent';
 import AddTeacher from './pages/AddTeacher';
 import CloseYear from './pages/CloseYear';
 import CloseYearConfirmation from './pages/CloseYearConfirmation';
-import Example from './pages/Example';
 import Classes from './pages/Classes';
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
 import Dashboard from './pages/Dashboard';
 import Authentification from "./pages/Authentification";
-
+import PrivateRoute from './components/PrivateRoute';
 
 const router = createBrowserRouter([
 	{
@@ -26,35 +25,35 @@ const router = createBrowserRouter([
 			},
 			{
 				path: '/classes',
-				element: <Classes />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<Classes />} />)
 			},
 			{
 				path: '/professorDistribution',
-				element: <ProfessorDistribution />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<ProfessorDistribution />} />)
 			},
 			{
 				path: '/addStudent',
-				element: <AddStudent />,
+        element: (<PrivateRoute allowedRoles={["ADMIN", "MAIRIE"]} element={<AddStudent />} />)
 			},
 			{
 				path: '/addTeacher',
-				element: <AddTeacher />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "MAIRIE"]} element={<AddTeacher />} />)
 			},
 			{
 				path: '/archives',
-				element: <Archives />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "MAIRIE"]} element={<Archives />} />)
 			},
 			{
 				path: '/closeYear',
-				element: <CloseYear />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<CloseYear />} />)
 			},
 			{
 				path: '/closeYearConfirmation',
-				element: <CloseYearConfirmation />,
+				element: (<PrivateRoute allowedRoles={["ADMIN", "DIRECTRICE"]} element={<CloseYearConfirmation />} />)
 			},
 			{
 				path: '/dashboard',
-				element: <Dashboard />,
+				element: (<PrivateRoute allowedRoles={["ADMIN"]} element={<Dashboard />} />),
 			},
       {
 				path: '/auth',
