@@ -80,7 +80,7 @@ const CloseYearConfirmation = () => {
 				<div className="mb-8 flex items-center justify-start">
 					<StatusIndicator status={archivageStatus} />
 					<span className="text-lg font-semibold">
-						Archivage de cette année
+						Archivage de l'année passée
 					</span>
 				</div>
 
@@ -95,7 +95,9 @@ const CloseYearConfirmation = () => {
 
 				<div className="mb-8 flex items-center justify-start">
 					<StatusIndicator status={affectationProfsStatus} />
-					<span className="text-lg font-semibold">Affectations des profs</span>
+					<span className="text-lg font-semibold">
+						Affectations des enseignants
+					</span>
 				</div>
 
 				<div className="mt-10">
