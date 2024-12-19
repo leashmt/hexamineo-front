@@ -3,6 +3,7 @@ import { LIST_LEVELS } from '../constants';
 import ButtonSkip from '../components/ButtonSkip';
 import ButtonRepeat from '../components/ButtonRepeat';
 import ButtonReset from '../components/ButtonReset';
+import { all } from 'axios';
 
 const PageVisualisationClasses = () => {
 	const [selectedClass, setSelectedClass] = useState(LIST_LEVELS[0]);
@@ -14,6 +15,9 @@ const PageVisualisationClasses = () => {
 		const fetchStudents = async () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/eleves');
+				if (!response.ok) {
+					throw new Error('Erreur lors de la récupération des élèves');
+				}
 				const data = await response.json();
 				setAllStudents(data);
 			} catch (error) {
