@@ -14,6 +14,7 @@ import Classe from './pages/Classe';
 import Dashboard from './pages/Dashboard';
 import Authentification from "./pages/Authentification";
 import PrivateRoute from './components/PrivateRoute';
+import ErrorPage from './pages/Error';
 
 const router = createBrowserRouter([
 	{
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
 				path: '/auth',
 				element: <Authentification />,
+			},
+			{
+				path: '/error',
+				element: <ErrorPage />,
 			},
 		],
 	},

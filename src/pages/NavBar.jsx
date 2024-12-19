@@ -148,7 +148,7 @@ const NavBar = () => {
 			<main className="flex-grow">
 				<Outlet />
 			</main>
-			<div className="w-full">
+			<div className="flex w-full">
 				<img
 					src={footerImage}
 					alt="Silhouette du petit prince"
