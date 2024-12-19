@@ -3,7 +3,6 @@ import { LIST_LEVELS } from '../constants';
 import ButtonSkip from '../components/ButtonSkip';
 import ButtonRepeat from '../components/ButtonRepeat';
 import ButtonReset from '../components/ButtonReset';
-import { all } from 'axios';
 
 const PageVisualisationClasses = () => {
 	const [selectedClass, setSelectedClass] = useState(LIST_LEVELS[0]);

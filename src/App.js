@@ -6,7 +6,6 @@ import AddStudent from './pages/AddStudent';
 import AddTeacher from './pages/AddTeacher';
 import CloseYear from './pages/CloseYear';
 import CloseYearConfirmation from './pages/CloseYearConfirmation';
-import Example from './pages/Example';
 import Classes from './pages/Classes';
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
