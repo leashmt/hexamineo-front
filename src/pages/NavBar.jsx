@@ -26,7 +26,6 @@ const NavBar = () => {
                     {/* Menu pour desktop */}
                     <div className="hidden lg:flex space-x-4 lg:space-x-8">
                         <Link to="/addStudent" className="hover:text-purple-custom">Ajouter des élèves</Link>
-                        <Link to="/error" className="hover:text-purple-custom">Test erreur</Link>
                         <Link to="/addTeacher" className="hover:text-purple-custom">Ajouter des professeurs</Link>
                         <Link to="/classes" className="hover:text-purple-custom">Visualiser les classes</Link>
                         <Link to="/archives" className="hover:text-purple-custom">Archives</Link>

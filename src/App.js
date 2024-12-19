@@ -9,7 +9,6 @@ import CloseYearConfirmation from './pages/CloseYearConfirmation';
 import Classes from './pages/Classes';
 import ProfessorDistribution from './pages/ProfessorDistribution';
 import Archives from './pages/Archives';
-import Error from './pages/Error';
 
 const router = createBrowserRouter([
 	{
@@ -19,10 +18,6 @@ const router = createBrowserRouter([
 			{
 				index: true,
 				element: <Home />,
-			},
-			{
-				path: '/error',
-				element: <Error />,
 			},
 			{
 				path: '/classes',

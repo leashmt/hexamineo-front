@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ErrorPage = () => {
-  const statusCode = 500; 
+const ErrorPage = (statusCode) => {
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100">
       <h1 className="text-6xl font-bold text-yellow-highlight mb-4">Erreur {statusCode}</h1>
