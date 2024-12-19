@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const initialUsers = [
-  { id: 1, name: "Madame Dupont", email: "dupont@ecole.fr", role: "Directrice" },
-  { id: 2, name: "Jean Martin", email: "jmartin@ecole.fr", role: "Professeur" },
-  { id: 3, name: "Mairie", email: "mairie@ville.fr", role: "Mairie" },
-];
+const API_URL = "http://localhost:3001/api/users";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState(initialUsers);
+  const [users, setUsers] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [newUser, setNewUser] = useState({
     id: null,
@@ -15,35 +12,76 @@ const Dashboard = () => {
     email: "",
     role: "Professeur",
   });
-
   const [editMode, setEditMode] = useState(false);
 
-  const handleAddOrEditUser = (e) => {
-    e.preventDefault();
-    if (editMode) {
-      setUsers(
-        users.map((user) =>
-          user.id === newUser.id ? { ...user, ...newUser } : user
-        )
-      );
-    } else {
-      setUsers([
-        ...users,
-        { id: users.length + 1, ...newUser },
-      ]);
+  useEffect(() => {
+    fetchUsers();
+  }, []);
+
+  const fetchUsers = async () => {
+    try {
+      const response = await axios.get(API_URL, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des utilisateurs :", error);
     }
-    setNewUser({ name: "", email: "", role: "Professeur" });
-    setShowForm(false);
-    setEditMode(false);
   };
 
-  const handleDeleteUser = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
+  const handleAddOrEditUser = async (e) => {
+    e.preventDefault();
+    try {
+      if (editMode) {
+        await axios.patch(
+          `${API_URL}/${newUser.id}`,
+          { ...newUser, role: newUser.role },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setUsers(users.map((user) => (user._id === newUser.id ? { ...user, ...newUser } : user)));
+      } else {
+        const response = await axios.post(
+          API_URL,
+          { ...newUser, role: newUser.role, password: "Saint-Exupery" },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setUsers([...users, response.data]);
+      }
+      setNewUser({ name: "", email: "", role: "Professeur" });
+      setShowForm(false);
+      setEditMode(false);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout ou la modification de l'utilisateur :", error);
+    }
   };
+
+  const handleDeleteUser = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      setUsers(users.filter((user) => user._id !== id));
+    } catch (error) {
+      console.error("Erreur lors de la suppression de l'utilisateur :", error);
+    }
+  };
+
   const handleEditUser = (user) => {
     setShowForm(true);
     setEditMode(true);
-    setNewUser(user);
+    setNewUser({ id: user._id, name: user.name, email: user.email, role: user.role });
   };
 
   return (
@@ -63,7 +101,7 @@ const Dashboard = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id} className="border-b">
+              <tr key={user._id} className="border-b">
                 <td className="p-2">{user.name}</td>
                 <td className="p-2">{user.email}</td>
                 <td className="p-2">{user.role}</td>
@@ -75,7 +113,7 @@ const Dashboard = () => {
                     Modifier
                   </button>
                   <button
-                    onClick={() => handleDeleteUser(user.id)}
+                    onClick={() => handleDeleteUser(user._id)}
                     className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                   >
                     Supprimer
@@ -141,9 +179,9 @@ const Dashboard = () => {
               }
               className="block w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400"
             >
-              <option value="Directrice">Directrice</option>
-              <option value="Professeur">Professeur</option>
-              <option value="Mairie">Mairie</option>
+              <option value="DIRECTRICE">Directrice</option>
+              <option value="PROFESSEUR">Professeur</option>
+              <option value="MAIRIE">Mairie</option>
             </select>
           </div>
           <button
