@@ -84,12 +84,6 @@ const NavBar = () => {
 							Visualiser les classes
 						</Link>
 						<Link
-							to="/changePassword"
-							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
-						>
-							mot de passe
-						</Link>
-						<Link
 							to="/archives"
 							className="block py-2 px-4 hover:bg-purple-custom hover:bg-opacity-65 rounded-md transition duration-200"
 						>
