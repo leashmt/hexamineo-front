@@ -19,7 +19,7 @@ const CloseYearConfirmation = () => {
 					{
 						method: 'POST',
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`
+							'Authorization': `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
@@ -34,7 +34,7 @@ const CloseYearConfirmation = () => {
 					{
 						method: 'PUT',
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`
+							'Authorization': `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
@@ -49,7 +49,7 @@ const CloseYearConfirmation = () => {
 					{
 						method: 'PUT',
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`
+							'Authorization': `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);

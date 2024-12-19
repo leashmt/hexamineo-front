@@ -29,7 +29,7 @@ const AddStudent = () => {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
+					'Authorization': `Bearer ${localStorage.getItem('token')}`,
 				},
 				body: JSON.stringify(student),
 			});
@@ -65,7 +65,7 @@ const AddStudent = () => {
 			const response = await fetch('http://localhost:3001/api/import-csv', {
 				method: 'POST',
 				headers: {
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
+					'Authorization': `Bearer ${localStorage.getItem('token')}`,
 				},
 				body: formData,
 			});

@@ -10,7 +10,7 @@ const Archives = () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/archive', {
 					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`
+						'Authorization': `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
 				const data = await response.json();

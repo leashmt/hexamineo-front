@@ -81,7 +81,10 @@ const Authentification = () => {
           </form>
 
           {message && 
-            <p className="mt-4 text-center text-red-500 font-medium">{message}</p>
+            <p className={`mt-4 text-center font-medium ${
+              message.includes("succès") || message.includes("Connexion réussie")
+              ? "text-green-500"
+              : "text-red-500"}`}> {message}</p>
           }
         </div>
       </div>
