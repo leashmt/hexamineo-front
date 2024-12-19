@@ -46,7 +46,7 @@ const PageVisualisationClasses = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-100 p-8">
+		<div className=" p-8 ">
 			<h1 className="text-3xl font-bold mb-6 text-gray-800">
 				Visualisation des Classes
 			</h1>
@@ -81,7 +81,7 @@ const PageVisualisationClasses = () => {
 							{filteredStudents.map(student => (
 								<li
 									key={student._id}
-									className={`flex items-center justify-between p-4 mb-2 rounded-lg border ${
+									className={`flex items-center justify-between p-4 mb-2 rounded-lg border shadow-md${
 										student.repeatGrade
 											? 'bg-red-100 border-red-400'
 											: student.skipGrade
