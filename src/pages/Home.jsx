@@ -6,7 +6,9 @@ import { useContext } from 'react';
 const Home = () => {
 	const navigate = useNavigate();
 	const { user } = useContext(UserContext);
-	const profLevel = user?.niveau.replace(/è|é/g, 'e').replace(/\s+/g, '-');
+	const profLevel = user?.niveau
+		? user.niveau.replace(/è|é/g, 'e').replace(/\s+/g, '-')
+		: '';
 
 	return (
 		<div className="flex-grow flex py-12">
