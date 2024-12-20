@@ -12,7 +12,6 @@ const Classe = () => {
 		niveau
 			?.replace(/(\d)eme\b/g, '$1ème') // Remplace "eme" par "ème"
 			.replace(/-/g, ' ') || LIST_LEVELS_LINK[0];
-	console.log(selectedClass);
 	const [filteredStudents, setFilteredStudents] = useState([]);
 	const [allStudents, setAllStudents] = useState([]);
 	const [isValidated, setIsValidated] = useState(false);
@@ -30,9 +29,8 @@ const Classe = () => {
 				}
 				const data = await response.json();
 				setAllStudents(data);
-				console.log(data);
 			} catch (error) {
-				console.error('Erreur lors de la récupération des élèves:', error);
+				// console.error('Erreur lors de la récupération des élèves:', error);
 			}
 		};
 

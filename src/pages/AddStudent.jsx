@@ -45,7 +45,7 @@ const AddStudent = () => {
 				alert('Une erreur est survenue');
 			}
 		} catch (error) {
-			console.error('Erreur réseau ou serveur :', error);
+			// console.error('Erreur réseau ou serveur :', error);
 			alert('Impossible de se connecter au serveur');
 		}
 	};
@@ -77,7 +77,7 @@ const AddStudent = () => {
 				setMessage("Erreur lors de l'importation du fichier");
 			}
 		} catch (error) {
-			console.error('Erreur:', error);
+			// console.error('Erreur:', error);
 			setMessage('Erreur lors de la connexion au serveur');
 		}
 	};

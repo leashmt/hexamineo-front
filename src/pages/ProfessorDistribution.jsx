@@ -23,7 +23,7 @@ const ProfessorDistribution = () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/professeurs', {
 					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
 				const data = await response.json();
@@ -36,7 +36,7 @@ const ProfessorDistribution = () => {
 				setAttribution(initialAttribution);
 				setProfesseurs(data);
 			} catch (error) {
-				console.error('Erreur lors de la récupération des professeurs:', error);
+				// console.error('Erreur lors de la récupération des professeurs:', error);
 			}
 		};
 
@@ -76,20 +76,14 @@ const ProfessorDistribution = () => {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
-
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 					body: JSON.stringify(attribution),
 				}
 			);
 			const data = await response.json();
-			if (response.ok) {
-				console.log('Niveaux mis à jour :', data);
-			} else {
-				console.error('Erreur lors de la mise à jour :', data.message);
-			}
 		} catch (error) {
-			console.error('Erreur lors de la requête :', error);
+			// console.error('Erreur lors de la requête :', error);
 		}
 	};
 

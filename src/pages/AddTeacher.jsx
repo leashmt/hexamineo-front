@@ -25,7 +25,7 @@ function AddTeacher() {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${localStorage.getItem('token')}`,
+					Authorization: `Bearer ${localStorage.getItem('token')}`,
 				},
 				body: JSON.stringify(teacher),
 			});
@@ -41,7 +41,7 @@ function AddTeacher() {
 				alert('Une erreur est survenue');
 			}
 		} catch (error) {
-			console.error('Erreur réseau ou serveur :', error);
+			// console.error('Erreur réseau ou serveur :', error);
 			alert('Impossible de se connecter au serveur');
 		}
 	};

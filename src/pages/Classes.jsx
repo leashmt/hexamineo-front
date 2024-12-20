@@ -19,14 +19,13 @@ const PageVisualisationClasses = () => {
 						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
-				console.log(response)
 				if (!response.ok) {
 					throw new Error('Erreur lors de la récupération des élèves');
 				}
 				const data = await response.json();
 				setAllStudents(data);
 			} catch (error) {
-				console.error('Erreur lors de la récupération des élèves:', error);
+				// console.error('Erreur lors de la récupération des élèves:', error);
 			}
 		};
 

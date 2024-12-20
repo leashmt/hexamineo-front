@@ -19,13 +19,13 @@ const CloseYearConfirmation = () => {
 					{
 						method: 'POST',
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`,
+							Authorization: `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
 				setArchivageStatus(responseArchive.ok);
 				if (!responseArchive.ok) {
-					return;
+					// return;
 				}
 
 				// passages
@@ -34,13 +34,13 @@ const CloseYearConfirmation = () => {
 					{
 						method: 'PUT',
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`,
+							Authorization: `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
 				setPassagesStatus(responsePassages.ok);
 				if (!responsePassages.ok) {
-					return;
+					// return;
 				}
 
 				// professeurs
@@ -49,16 +49,16 @@ const CloseYearConfirmation = () => {
 					{
 						method: 'PUT',
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`,
+							Authorization: `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
 				setAffectationProfsStatus(responseProfesseurs.ok);
 				if (!responseProfesseurs.ok) {
-					return;
+					// return;
 				}
 			} catch (error) {
-				console.error('Erreur pendant le chargement des données', error);
+				// console.error('Erreur pendant le chargement des données', error);
 			}
 		};
 

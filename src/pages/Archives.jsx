@@ -10,13 +10,13 @@ const Archives = () => {
 			try {
 				const response = await fetch('http://localhost:3001/api/archive', {
 					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
 				const data = await response.json();
 				setArchivedStudents(data);
 			} catch (error) {
-				console.error('Erreur lors de la récupération des élèves:', error);
+				// console.error('Erreur lors de la récupération des élèves:', error);
 			}
 		};
 

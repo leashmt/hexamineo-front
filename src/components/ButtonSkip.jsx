@@ -9,17 +9,17 @@ const ButtonSkip = ({ updateStudentStatus, student }) => {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				}
 			);
 			if (response.ok) {
 				updateStudentStatus(student._id, 'skip');
 			} else {
-				console.error('Erreur lors de la mise à jour du statut de l’élève');
+				// console.error('Erreur lors de la mise à jour du statut de l’élève');
 			}
 		} catch (error) {
-			console.error('Erreur de réseau:', error);
+			// console.error('Erreur de réseau:', error);
 		}
 	};
 

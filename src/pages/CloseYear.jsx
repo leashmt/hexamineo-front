@@ -16,7 +16,7 @@ const CloseYear = () => {
 				//check professors
 				const response = await fetch('http://localhost:3001/api/professeurs', {
 					headers: {
-						'Authorization': `Bearer ${localStorage.getItem('token')}`,
+						Authorization: `Bearer ${localStorage.getItem('token')}`,
 					},
 				});
 				const professeurs = await response.json();
@@ -28,9 +28,10 @@ const CloseYear = () => {
 
 				// check new students
 				const responseEleves = await fetch(
-					'http://localhost:3001/api/eleves/without-level', {
+					'http://localhost:3001/api/eleves/without-level',
+					{
 						headers: {
-							'Authorization': `Bearer ${localStorage.getItem('token')}`,
+							Authorization: `Bearer ${localStorage.getItem('token')}`,
 						},
 					}
 				);
@@ -53,7 +54,7 @@ const CloseYear = () => {
 				}
 				setClassValidate(checkClasses);
 			} catch (error) {
-				console.error('Erreur pendant le chargement des données', error);
+				// console.error('Erreur pendant le chargement des données', error);
 			} finally {
 				setIsLoading(false);
 			}
